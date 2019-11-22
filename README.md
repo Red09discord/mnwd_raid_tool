@@ -16,9 +16,9 @@ Supports Windows, Linux, Mac, [Android](https://github.com/meanwood/mnwd_raid_to
 
 ![VC Spammer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/RTBFiles/extras/screenshots/vcspammer.png)
 
-![Status Changer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/RTBFiles/extras/screenshots/statuschanger.png)
+![Status Changer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/RTBFiles/extras/screenshots/statuschanger.png)
 
-![HypeSquad Changer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/RTBFiles/extras/screenshots/hypesquadchanger.png)
+![HypeSquad Changer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/RTBFiles/extras/screenshots/hypesquadchanger.png)
 
 
 # `Features:`
