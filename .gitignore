@@ -8,6 +8,9 @@
 MRTFiles/licence
 *.txt
 MRTFiles/rtb_icon.png
+!requirements.txt
+!requirements_mac.txt
+!requirements_termux.txt
 
 
 ### PyCharm+all Patch ###
