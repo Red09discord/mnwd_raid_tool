@@ -1,6 +1,5 @@
 {
     "skin": "Future Bloo",
-    "token_list": "VARIABLE.txt",
     "thread_count": 800,
     "use_proxies": 0,
     "proxy_type": "https",
