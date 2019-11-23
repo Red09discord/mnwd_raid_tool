@@ -1,4 +1,4 @@
-# mnwd_raid_tool
+# mnwd raid tool
 
 A big toolkit of spamming tools for discord.
 
