@@ -6,7 +6,7 @@ A big toolkit of spamming tools for discord.
 
 Supports Windows, Linux, Mac, [Android](https://github.com/meanwood/mnwd_raid_tool/wiki/How-to-set-up-Termux-to-run-MRT) and iOS with [iSH](https://ish.app/). (Tested on Windows 10 Education/Professional, Ubuntu 18.10, Mac OS Sierra and Android 9 with Termux 0.72)
 
-# `Installation:`
+### `Installation:`
 The instructions to install MRT can be found 
 1. Click "release"
 2. Download & extract "Source code (zip)
