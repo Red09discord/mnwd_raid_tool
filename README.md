@@ -76,3 +76,8 @@ Menu Theme can be changed by going to MRT > Themes > Change Theme, and setting c
 # **Disclaimer**
 
 We are not responsible for any damages caused with mnwd_raid_tool by other peoples actions by this program. 
+
+
+# **Initial creator**
+
+Deadbread76
