@@ -1,5 +1,5 @@
 {
-    "ss_token_list": "",
+    "ss_token_list": "sstokens.txt",
     "startup_status": "invisible",
     "startup_activity_name": "Server Smasher 1.0.0a",
     "startup_activity_type": "Streaming",

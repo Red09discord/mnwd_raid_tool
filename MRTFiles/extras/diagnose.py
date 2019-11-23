@@ -19,7 +19,7 @@ while True:
     print("raid tool DIAGNOSIS TOOL")
     print("===========================")
     try:
-        print("MRT Version: {}\nSM Version: {}".format(rtbversion,smversion))
+        print("MRT Version: {}\nSM Version: {}".format(mrtversion,smversion))
     except Exception:
         print("MRT was unable to start")
     print("===========================")

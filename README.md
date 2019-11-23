@@ -8,17 +8,17 @@ Supports Windows, Linux, Mac, [Android](https://github.com/meanwood/mnwd_raid_to
 
 ### Screenshots:
 
-![Screenshot](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/MRTFiles/extras/screenshots/main.png)
+![Main Menu](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/MRTFiles/extras/screenshots/main.png)
 
-![Joiner Menu](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/MRTFiles/extras/screenshots/joiner.png)
+![Joiner Menu](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/MRTFiles/extras/screenshots/joiner.png)
 
-![Message Spammer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/MRTFiles/extras/screenshots/messagespammer.png)
+![Message Spammer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/MRTFiles/extras/screenshots/messagespammer.png)
 
-![VC Spammer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/MRTFiles/extras/screenshots/vcspammer.png)
+![VC Spammer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/MRTFiles/extras/screenshots/vcspammer.png)
 
-![Status Changer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/MRTFiles/extras/screenshots/statuschanger.png)
+![Image Spammer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/MRTFiles/extras/screenshots/imagespammer.png)
 
-![HypeSquad Changer](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/MRTFiles/extras/screenshots/hypesquadchanger.png)
+![Server Smasher](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/MRTFiles/extras/screenshots/serversmasher.png)
 
 
 # `Features:`

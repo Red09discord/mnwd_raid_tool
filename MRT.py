@@ -344,7 +344,7 @@
 # Public License instead of this License.
 
 
-rtbversion = "1.2.3"
+mrtversion = "1.0.0"
 
 # Load Config
 try:
@@ -600,9 +600,9 @@ if __name__ == "__main__":
             [sg.Image(data=rtb_splash, pad=((0, 0), 0))]
         ]
         if sys.platform.startswith("darwin"):
-            window = sg.Window("meanwood's raid tool v{} | Loading...".format(rtbversion), icon=rtb_icon, no_titlebar=True, grab_anywhere=True).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | Loading...".format(mrtversion), icon=rtb_icon, no_titlebar=True, grab_anywhere=True).Layout(layout)
         else:
-            window = sg.Window("meanwood's raid tool v{} | Loading...".format(rtbversion), icon=rtb_icon, no_titlebar=True, grab_anywhere=True, margins=(0,0)).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | Loading...".format(mrtversion), icon=rtb_icon, no_titlebar=True, grab_anywhere=True, margins=(0,0)).Layout(layout)
         window.Read(timeout=0)
 
 # Clear() Function setting
@@ -833,7 +833,7 @@ if __name__ == "__main__":
     if disable_update_check == 1:
         pass
     else:
-        if "b" in rtbversion:
+        if "b" in mrtversion:
             pass
         else:
             try:
@@ -841,7 +841,7 @@ if __name__ == "__main__":
                     print("Checking for updates...")
                 vercheck = requests.get("https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/version").text.rstrip().split("|")
                 versionno = vercheck[0].split(".")
-                myversion = rtbversion.split(".")
+                myversion = mrtversion.split(".")
                 if versionno[0] > myversion[0]:
                     update = True
                 elif versionno[1] > myversion[1]:
@@ -1024,7 +1024,7 @@ if __name__ == "__main__":
     # Display License
     if not show_licence == 0:
         licfile = requests.get("https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/LICENSE").text
-        lic = f"meanwood's raid tool v{rtbversion}, Copyright (C) 2019, meanwood\n"
+        lic = f"meanwood's raid tool v{mrtversion}, Copyright (C) 2019, meanwood\n"
         if command_line_mode == 1:
             print(lic+"\n"+"Please Read the licence at https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/LICENSE")
             time.sleep(5)
@@ -1045,7 +1045,7 @@ if __name__ == "__main__":
     # CloudFlare Checks
     if disable_cloudflare_check == 1:
         pass
-    elif not "b" in rtbversion:
+    elif not "b" in mrtversion:
         if verbose == 1:
             print("Checking CloudFlare Status")
         try:
@@ -1075,20 +1075,20 @@ def titleupdate():
                 pass
             else:
                 currentattacks.pop(attack)
-        if "b" in rtbversion:
+        if "b" in mrtversion:
             if len(currentattacks) == 0:
-                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION)".format(rtbversion))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION)".format(mrtversion))
             elif len(currentattacks) == 1:
-                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION) | ({} Attack Running.)".format(rtbversion,len(currentattacks)))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION) | ({} Attack Running.)".format(mrtversion,len(currentattacks)))
             else:
-                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION) | ({} Attacks Running.)".format(rtbversion,len(currentattacks)))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION) | ({} Attacks Running.)".format(mrtversion,len(currentattacks)))
         else:
             if len(currentattacks) == 0:
-                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{}".format(rtbversion))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{}".format(mrtversion))
             elif len(currentattacks) == 1:
-                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} | ({} Attack Running.)".format(rtbversion,len(currentattacks)))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} | ({} Attack Running.)".format(mrtversion,len(currentattacks)))
             else:
-                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} | ({} Attacks Running.)".format(rtbversion,len(currentattacks)))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} | ({} Attacks Running.)".format(mrtversion,len(currentattacks)))
         time.sleep(2)
 
 
@@ -1138,15 +1138,15 @@ def main():
             print("Unable to load token list.")
             input()
     if sys.platform.startswith('win32'):
-        if "b" in rtbversion:
-            ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION)".format(rtbversion))
+        if "b" in mrtversion:
+            ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION)".format(mrtversion))
         else:
-            ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{}".format(rtbversion))
+            ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{}".format(mrtversion))
     else:
-        if "b" in rtbversion:
-            sys.stdout.write("\x1b]2;meanwood's raid tool v{} (TEST VERSION)\x07".format(rtbversion))
+        if "b" in mrtversion:
+            sys.stdout.write("\x1b]2;meanwood's raid tool v{} (TEST VERSION)\x07".format(mrtversion))
         else:
-            sys.stdout.write("\x1b]2;meanwood's raid tool v{}\x07".format(rtbversion))
+            sys.stdout.write("\x1b]2;meanwood's raid tool v{}\x07".format(mrtversion))
     #  _____                        __  __
     # |_   _|__ _ _ _ __ _  ___ __ |  \/  |___ _ _ _  _
     #   | |/ -_) '_| '  \ || \ \ / | |\/| / -_) ' \ || |
@@ -1215,7 +1215,7 @@ def main():
                 [sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_nickname_changer, key="Nickname Changer"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_embed_spammer, key="Embed Spammer"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_avatar_changer, key="Avatar Changer")],
                 [sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_server_cleaner, key="Server Cleaner"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_hypesquad_changer, key="HypeSquad Changer"),  sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_reaction_adder, key="Reaction Adder")],
             ]
-            window = sg.Window("meanwood's raid tool v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)), icon=rtb_icon).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | [{} Tokens available.]".format(mrtversion,len(tokenlist)), icon=rtb_icon).Layout(layout)
         else:
             menu_def = [
                 ['&MRT', ['&Attack Manager', '&Options', ['Updater', '&Settings', '&Themes', ['Change Theme', 'Theme Repo']], 'Tools', ['Proxy Checker/Scraper', 'CPU Widget', 'CF Check'], 'About', ['Info', 'Diagnostics']]],
@@ -1235,7 +1235,7 @@ def main():
                 [sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_nickname_changer, key="Nickname Changer"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_embed_spammer, key="Embed Spammer"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_avatar_changer, key="Avatar Changer")],
                 [sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_server_cleaner, key="Server Cleaner"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_hypesquad_changer, key="HypeSquad Changer"),  sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_reaction_adder, key="Reaction Adder")],
             ]
-            window = sg.Window("meanwood's raid tool v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)), icon=rtb_icon, transparent_color=transparent_colour).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | [{} Tokens available.]".format(mrtversion,len(tokenlist)), icon=rtb_icon, transparent_color=transparent_colour).Layout(layout)
         while True:
             event, values = window.Read(timeout=100)
             if event is None:
@@ -1253,11 +1253,11 @@ def main():
                         currentattacks.pop(attack)
                 if not sys.platform.startswith('darwin'):
                     if len(currentattacks) == 0:
-                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)))
+                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.]".format(mrtversion,len(tokenlist)))
                     elif len(currentattacks) == 1:
-                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.] | [{} Attack Running.]".format(rtbversion,len(tokenlist),len(currentattacks)))
+                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.] | [{} Attack Running.]".format(mrtversion,len(tokenlist),len(currentattacks)))
                     else:
-                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.] | [{} Attacks Running.]".format(rtbversion,len(tokenlist),len(currentattacks)))
+                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.] | [{} Attacks Running.]".format(mrtversion,len(tokenlist),len(currentattacks)))
             #    _  _   _           _     __  __
             #   /_\| |_| |_ __ _ __| |__ |  \/  |__ _ _ _  __ _ __ _ ___ _ _
             #  / _ \  _|  _/ _` / _| / / | |\/| / _` | ' \/ _` / _` / -_) '_|
@@ -1282,7 +1282,7 @@ def main():
                         layout.append([sg.Button('Stop All',size=(10,1), pad=((419, 1), 10))])
                 else:
                     layout.append([sg.Button("No Attacks Running",size=(60,1))])
-                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(mrtversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                 c = 0
                 while True:
                     event, values = window.Read(timeout=10)
@@ -1314,7 +1314,7 @@ def main():
                                         else:
                                             layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                         window.Close()
-                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(mrtversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                             else:
                                 currentattacks.pop(attack)
                                 layout = [[sg.Text("Running Attacks: {}".format(len(currentattacks)))]]
@@ -1326,7 +1326,7 @@ def main():
                                 else:
                                     layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                 window.Close()
-                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(mrtversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                     elif event == "Stop All":
                         for attack in currentattacks:
                             try:
@@ -1348,7 +1348,7 @@ def main():
                                         else:
                                             layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                         window.Close()
-                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(mrtversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                             else:
                                 currentattacks.pop(attack)
                                 layout = [[sg.Text("Running Attacks: {}".format(len(currentattacks)))]]
@@ -1360,7 +1360,7 @@ def main():
                                 else:
                                     layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                 window.Close()
-                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(mrtversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                     elif event in currentattacks:
                         try:
                             os.kill(int(currentattacks[event]), 9)
@@ -1381,7 +1381,7 @@ def main():
                                         else:
                                             layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                         window.Close()
-                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(mrtversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                             else:
                                 currentattacks.pop(attack)
                                 layout = [[sg.Text("Running Attacks: {}".format(len(currentattacks)))]]
@@ -1393,7 +1393,7 @@ def main():
                                 else:
                                     layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                 window.Close()
-                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(mrtversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
             #  _____ _                    __  __                                       _
             # |_   _| |_  ___ _ __  ___  |  \/  |__ _ _ _  __ _ __ _ ___ _ __  ___ _ _| |_
             #   | | | ' \/ -_) '  \/ -_) | |\/| / _` | ' \/ _` / _` / -_) '  \/ -_) ' \  _|
@@ -1411,7 +1411,7 @@ def main():
                         [sg.Text('Theme Bio:',size=(13,1)),sg.Text((theme_bio))],
                         [sg.Text('Change Theme:',size=(13,1)), sg.Combo(skinlist, default_value=skin, size=(30,1)), sg.Button('Change',size=(10,1))]
                     ]
-                    window = sg.Window("meanwood's raid tool v{} | Themes".format(rtbversion), icon=rtb_icon, size=(500,100)).Layout(layout)
+                    window = sg.Window("meanwood's raid tool v{} | Themes".format(mrtversion), icon=rtb_icon, size=(500,100)).Layout(layout)
                     event, values = window.Read()
                     if event is None:
                         window.Close()
@@ -1489,7 +1489,7 @@ def main():
                 for package in repojson['packages']:
                     links[package['theme_name']] = package['theme_dl_link']
                     layout.append([sg.Text("{} v{} by {} ({})".format(package['theme_name'],package['theme_version'],package['theme_author'],package['rtb_compatible']),size=(50,1)), sg.Button("Download",key=package['theme_name'])])
-                window = sg.Window("meanwood's raid tool v{} | Theme Repo".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Theme Repo".format(mrtversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -1511,18 +1511,18 @@ def main():
             #       |_|
             elif event == "Updater":
                 window.Close()
-                if "b" in rtbversion:
-                    sg.Popup("You are using a test version, be careful.",non_blocking=True,keep_on_top=True, title="MRT Version {}".format(rtbversion), icon=rtb_icon)
-                devbuild = requests.get('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/version').text
+                if "b" in mrtversion:
+                    sg.Popup("You are using a test version, be careful.",non_blocking=True,keep_on_top=True, title="MRT Version {}".format(mrtversion), icon=rtb_icon)
+                devbuild = requests.get('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/version').text
                 devbuild = devbuild.split("|")
                 masterbuild = requests.get('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/version').text
                 masterbuild = masterbuild.split("|")
                 layout = [
-                    [sg.Text("Current Version: {}".format(rtbversion))],
+                    [sg.Text("Current Version: {}".format(mrtversion))],
                     [sg.Text("Master Branch Version: {}".format(masterbuild[0]),size=(30,1)), sg.Button("Download Master",size=(15,1),key="Master")],
                     [sg.Text("Dev Branch Version: {}".format(devbuild[0]),size=(30,1)), sg.Button("Download Dev",size=(15,1),key="Dev")],
                 ]
-                window = sg.Window("meanwood's raid tool v{} | Updater".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Updater".format(mrtversion), icon=rtb_icon).Layout(layout)
                 event, values = window.Read()
                 if event is None:
                     window.Close()
@@ -1611,7 +1611,7 @@ def main():
                     [sg.Frame("Proxy Options", proxy_frame, font='Any 12', title_color=text_color)],
                     [sg.Button("Save", size=(10, 1)), sg.Button("Back", size=(10, 1))],
                 ]
-                window = sg.Window("MRT v{} | Settings".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("MRT v{} | Settings".format(mrtversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None or event == "Back":
@@ -1673,11 +1673,11 @@ def main():
                     ]
                     layout = [
                         [sg.Image(data=rtb_banner)],
-                        [sg.Text("Version {}".format(rtbversion))],
+                        [sg.Text("Version {}".format(mrtversion))],
                         [sg.Text("Copyright (c) 2019, meanwood\n\n")],
                         [sg.Frame("Credits/Special Thanks:", frame, font="Any 15", title_color=text_color)],
                     ]
-                    window = sg.Window("meanwood's raid tool v{} | Info".format(rtbversion), icon=rtb_icon).Layout(layout)
+                    window = sg.Window("meanwood's raid tool v{} | Info".format(mrtversion), icon=rtb_icon).Layout(layout)
                     event, values = window.Read()
                     if event is None:
                         window.Close()
@@ -1715,7 +1715,7 @@ def main():
                 with open ("Diagnostics" +filename+".txt", 'w+', errors='ignore') as handle:
                     handle.write("raid tool Diagnostics "+str(now.strftime("%d/%m/%Y %H:%M:%S"))+"\n")
                     handle.write("=====================================================\n")
-                    handle.write("MRT VERSION: " + rtbversion + "\n")
+                    handle.write("MRT VERSION: " + mrtversion + "\n")
                     try:
                         handle.write("Startup Time: {}".format(t1-t0)+"\n")
                     except Exception:
@@ -1777,7 +1777,7 @@ def main():
                             [sg.Menu(menu_def)],
                             [sg.Multiline(default_text=textedit, size=(80, 20))]
                         ]
-                        window = sg.Window("meanwood's raid tool v{} | Editing {}".format(rtbversion,token_list), icon=rtb_icon).Layout(layout)
+                        window = sg.Window("meanwood's raid tool v{} | Editing {}".format(mrtversion,token_list), icon=rtb_icon).Layout(layout)
                         event, values = window.Read()
                         if event is None:
                             window.Close()
@@ -1801,7 +1801,7 @@ def main():
                             size = len(open("tokens/"+file).read().splitlines())
                             layout.append([sg.Text("{} ({} Tokens)".format(file,size), size=(45,1)), sg.Button("Select", key=file, size=(8,1))])
                 layout.append([sg.Button("Create New...", size=(10,1))])
-                window = sg.Window("meanwood's raid tool v{} | Token lists".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Token lists".format(mrtversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -1835,7 +1835,7 @@ def main():
                                     size = len(open("tokens/"+file).read().splitlines())
                                     layout.append([sg.Text("{} ({} Tokens)".format(file,size), size=(45,1)), sg.Button("Select", key=file, size=(8,1))])
                             layout.append([sg.Button("Create New...", size=(10,1))])
-                            window = sg.Window("meanwood's raid tool v{} | Token lists".format(rtbversion), icon=rtb_icon).Layout(layout)
+                            window = sg.Window("meanwood's raid tool v{} | Token lists".format(mrtversion), icon=rtb_icon).Layout(layout)
             elif event == "Token Stealer Builder":
                 p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','StealerBuilder',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)])
                 currentattacks["Token Stealer Builder | Started at: {}".format(datetime.datetime.now().time())] = p.pid
@@ -1848,7 +1848,7 @@ def main():
                     [sg.Button("Login to Token", size=(15,1), tooltip="Login to the token (You Need firefox to do this)"),sg.Button("Login to Bot Token", size=(15,1), tooltip="Login to the token (You Need firefox to do this)"), sg.Button("Gift Inventory", size=(15,1), tooltip="View the gift in the tokens inventory."), sg.Button("DDDC", size=(15,1), tooltip="Just a thing I made when I was bored, it's based on a game called Doki Doki Literature Club (Weeb ikr)")],
                     [sg.Button("Friend Clearer", size=(15,1), tooltip="Clear all pending friend requests at lightning speed"), sg.Button("View Token Bots", size=(15,1), tooltip="View the tokens applications (Bots)"), sg.Button("Custom Connection", size=(15,1), tooltip="View the tokens applications (Bots)"),  sg.Button("Account Annihilator", size=(15,1), tooltip="Leave all servers, Remove all friends, etc.")]
                 ]
-                window = sg.Window("meanwood's raid tool v{} | Token Toolkit".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Token Toolkit".format(mrtversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -2061,7 +2061,7 @@ def main():
                     layout.append([sg.Text("None", size=(50,1)), sg.Button("OK", size=(6,1))])
                 for plug in plugs:
                     layout.append([sg.Text(plug.replace("_rtbplugin",""), size=(50,1)), sg.Button("Launch", key=plug, size=(6,1))])
-                window = sg.Window("meanwood's raid tool v{} | Plugins".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Plugins".format(mrtversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -2078,7 +2078,7 @@ def main():
             elif event == "Plugin Repo":
                 sg.PopupNonBlocking("Downloading Package Index From repo", title="Loading", keep_on_top=True, auto_close=True, auto_close_duration=1, icon=rtb_icon)
                 window.Close()
-                repojson = json.loads(requests.get('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool-Plugins-V2/master/packages.json').content)
+                repojson = json.loads(requests.get('https://raw.githubusercontent.com/meanwood/MRT-Plugins/master/packages.json').content)
                 links = {}
                 layout = [
                     [sg.Text("Available Plugins:")]
@@ -2086,7 +2086,7 @@ def main():
                 for package in repojson['packages']:
                     links[package['plugin_name']] = package['plugin_dl_link']
                     layout.append([sg.Text("{} by {}".format(package['plugin_name'],package['plugin_author']),size=(50,1)), sg.Button("Download",key=package['plugin_name'])])
-                window = sg.Window("meanwood's raid tool v{} | Plugin Repo".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Plugin Repo".format(mrtversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -2865,15 +2865,15 @@ def customplugins():
         customplugins()
     if plug == 'd':
         clear()
-        down = requests.get("https://github.com/meanwood/mnwd_raid_tool-Plugins/archive/master.zip")
+        down = requests.get("https://github.com/meanwood/MRT-Plugins/archive/master.zip")
         with open("legacyplugins/package.zip", "wb") as handle:
             handle.write(down.content)
         shutil.unpack_archive("legacyplugins/package.zip","legacyplugins/")
         os.remove("legacyplugins/package.zip")
-        for root, dirs, files in os.walk("legacyplugins/mnwd_raid_tool-Plugins-master/", topdown=False):
+        for root, dirs, files in os.walk("legacyplugins/MRT-Plugins-master/", topdown=False):
             for folder in dirs:
-                copy_tree("legacyplugins/mnwd_raid_tool-Plugins-master/{}/".format(folder), "legacyplugins/{}/".format(folder+"/"))
-        shutil.rmtree("legacyplugins/mnwd_raid_tool-Plugins-master/")
+                copy_tree("legacyplugins/MRT-Plugins-master/{}/".format(folder), "legacyplugins/{}/".format(folder+"/"))
+        shutil.rmtree("legacyplugins/MRT-Plugins-master/")
         print("Downloaded plugins from Repo.")
         input("Press enter to reload plugins")
         customplugins()
@@ -2921,7 +2921,7 @@ def diagrun():
     with open ("Diagnostics" +filename+".txt", 'w+') as handle:
         handle.write("raid tool Diagnostics "+str(now.strftime("%d/%m/%Y %H:%M:%S"))+"\n")
         handle.write("=====================================================\n")
-        handle.write("MRT VERSION: " + rtbversion + "\n")
+        handle.write("MRT VERSION: " + mrtversion + "\n")
         handle.write("SM VERSION: " + smversion + "\n")
         try:
             handle.write("Startup Time: {}".format(t1-t0)+"\n")
@@ -3021,7 +3021,7 @@ def info():
         print (colored("SINGLE FILE MODE ACTIVE",menu2))
     if no_tk_mode == 1:
         print (colored("Termux Mode.",menu2))
-    print (colored("raid tool version: "+rtbversion,menu2))
+    print (colored("raid tool version: "+mrtversion,menu2))
     if verbose == 1:
         print(colored("\nStartup Time: {}".format(t1-t0),menu2))
     print (colored("                                                            ",menu1))
@@ -3074,7 +3074,7 @@ def info():
         input()
     elif inf.lower() == 'update':
         clear()
-        if "b" in rtbversion:
+        if "b" in mrtversion:
             print("This is a test version of MRT, Please do not update.")
             input()
         else:
@@ -3580,7 +3580,7 @@ if __name__ == "__main__":
                 layout.append([sg.Text("No Files in the tokens folder.", size=(45,1)), sg.Button("Create New...", size=(10,1))])
             else:
                 layout.append([sg.Button("Create New...", size=(10,1)), sg.Button("Close", size=(10,1))])
-            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(rtbversion)).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(mrtversion)).Layout(layout)
             while True:
                 event, values = window.Read()
                 if event is None:
@@ -3621,7 +3621,7 @@ if __name__ == "__main__":
                                 layout.append([sg.Text("No Files in the tokens folder.", size=(45,1)), sg.Button("Create New...", size=(8,1))])
                             else:
                                 layout.append([sg.Button("Create New...", size=(10,1)), sg.Button("Close", size=(10,1))])
-                            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(rtbversion)).Layout(layout)
+                            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(mrtversion)).Layout(layout)
                             break
                         else:
                             try:
@@ -3644,7 +3644,7 @@ if __name__ == "__main__":
                                 layout.append([sg.Text("No Files in the tokens folder.", size=(45,1)), sg.Button("Create New...", size=(8,1))])
                             else:
                                 layout.append([sg.Button("Create New...", size=(10,1)), sg.Button("Close", size=(10,1))])
-                            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(rtbversion)).Layout(layout)
+                            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(mrtversion)).Layout(layout)
                             break
                 elif event == "Close":
                     window.Close()
