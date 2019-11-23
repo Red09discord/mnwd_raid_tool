@@ -344,7 +344,7 @@
 # Public License instead of this License.
 
 
-mrtversion = "1.0.0"
+mrtversion = "1.0.1"
 
 # Load Config
 try:
