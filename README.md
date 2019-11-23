@@ -6,6 +6,13 @@ A big toolkit of spamming tools for discord.
 
 Supports Windows, Linux, Mac, [Android](https://github.com/meanwood/mnwd_raid_tool/wiki/How-to-set-up-Termux-to-run-MRT) and iOS with [iSH](https://ish.app/). (Tested on Windows 10 Education/Professional, Ubuntu 18.10, Mac OS Sierra and Android 9 with Termux 0.72)
 
+# `Installation:`
+The instructions to install MRT can be found 
+1. Click "release"
+2. Download & extract "Source code (zip)
+3. Follow the install instructions [here](https://github.com/meanwood/mnwd_raid_tool/wiki/How-to-install-Python)
+4. Double click MRT.py or open CMD, navigate to MRT-folder and start it by typing "python MRT.py"
+
 ### Screenshots:
 
 ![Main Menu](https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/MRTFiles/extras/screenshots/main.png)
@@ -50,10 +57,6 @@ Supports Windows, Linux, Mac, [Android](https://github.com/meanwood/mnwd_raid_to
 **Server Smasher**
 
 **Plugins**
-
-# `Installation:`
-
-The instructions to install MRT can be found [here](https://github.com/meanwood/mnwd_raid_tool/wiki/How-to-install-Python)
 
 
 ### `Python:`
