@@ -1,6 +1,6 @@
 {
     "skin": "Future Bloo",
-    "thread_count": 800,
+    "thread_count": 500,
     "use_proxies": 0,
     "proxy_type": "https",
     "proxy_list": "proxies.txt",
