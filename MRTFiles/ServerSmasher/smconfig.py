@@ -1,6 +1,6 @@
 # Server Smasher Config File
 # The options here should be used for quick destruction presets.
-# If You somehow messed up this file, get a replacement here: https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/spammer/smconfig.py
+# If You somehow messed up this file, get a replacement here: https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/spammer/smconfig.py
 
 usemultiple = True #Use multiple tokens, add them into the text file called "smtokens.txt"
 token = "TOKEN HERE" #Supports user accounts, although it is untested

@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-# Raid Toolbox
-# Author: DeadBread76 - https://github.com/DeadBread76/
-# February 23rd, 2019 - Yikes
+# raid tool
 #
-# Copyright 2019, DeadBread
+# Copyright 2019, meanwood
 #
 #                     GNU GENERAL PUBLIC LICENSE
 #                        Version 2, June 1991
@@ -381,22 +379,22 @@ except Exception:
     import sys
     import urllib.request
     import subprocess
-    if not os.path.exists("RTBFiles/"):
-        print("RTBFiles Directory not found.")
+    if not os.path.exists("MRTFiles/"):
+        print("MRTFiles Directory not found.")
     print("Downloading config.json...")
-    response = urllib.request.urlopen('https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/config.json')
+    response = urllib.request.urlopen('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/config.json')
     data = response.read()
     data = data.decode('utf-8')
     with open("config.json","w+") as handle:
         handle.write(data)
     print("Downloading requirements.txt...")
-    response = urllib.request.urlopen('https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/requirements.txt')
+    response = urllib.request.urlopen('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/requirements.txt')
     data = response.read()
     data = data.decode('utf-8')
     with open("requirements.txt","w+") as handle:
         handle.write(data)
     print("Downloading DeadRed.py...")
-    response = urllib.request.urlopen('https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/themes/DeadRed.py')
+    response = urllib.request.urlopen('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/themes/DeadRed.py')
     data = response.read()
     data = data.decode('utf-8')
     try:
@@ -406,14 +404,14 @@ except Exception:
     with open("themes/DeadRed.py","w+") as handle:
         handle.write(data)
     print("Downloading attack_dict.py...")
-    response = urllib.request.urlopen('https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/RTBFiles/attack_dict.py')
+    response = urllib.request.urlopen('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/MRTFiles/attack_dict.py')
     data = response.read()
     data = data.decode('utf-8')
     try:
-        os.mkdir("RTBFiles")
+        os.mkdir("MRTFiles")
     except Exception:
         pass
-    with open("RTBFiles/attack_dict.py","w+") as handle:
+    with open("MRTFiles/attack_dict.py","w+") as handle:
         handle.write(data)
     try:
         with open('config.json', 'r') as handle:
@@ -442,7 +440,7 @@ except Exception:
             print("Hmmm, pip doesn't seem to be installed.\nDownload errorfixer script?")
             x = input("(Y/N): ")
             if x.lower() == "y":
-                response = urllib.request.urlopen('https://raw.githubusercontent.com/Mattlau04/RTB-error-fixer/master/Errorfixer.bat')
+                response = urllib.request.urlopen('https://raw.githubusercontent.com/Mattlau04/MRT-error-fixer/master/Errorfixer.bat')
                 data = response.read()
                 data = data.decode('utf-8')
                 with open("Errorfixer.bat","w+") as handle:
@@ -503,13 +501,13 @@ from distutils.dir_util import copy_tree
 if sys.platform.startswith('win32'):
     from subprocess import CREATE_NEW_CONSOLE
 if sys.platform.startswith('win32'):
-    ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox is loading...")
+    ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool is loading...")
 else:
-    sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox is loading...\x07")
+    sys.stdout.write("\x1b]2;meanwood's raid tool is loading...\x07")
 
 # Import Dictionary Module
-import RTBFiles.attack_dict
-currentattacks = RTBFiles.attack_dict.currentattacks  # Dict for attacks (Shared with plugins)
+import MRTFiles.attack_dict
+currentattacks = MRTFiles.attack_dict.currentattacks  # Dict for attacks (Shared with plugins)
 
 t0 = time.time()  # Startup Time Counter thanks to https://github.com/Mattlau04
 
@@ -574,7 +572,7 @@ except Exception as e:
         handle.truncate()
 
 # Create Icon Image
-with open("RTBFiles/rtb_icon.png", "wb") as f:
+with open("MRTFiles/rtb_icon.png", "wb") as f:
     f.write(base64.b64decode(rtb_icon))
 
 colours = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan']
@@ -602,9 +600,9 @@ if __name__ == "__main__":
             [sg.Image(data=rtb_splash, pad=((0, 0), 0))]
         ]
         if sys.platform.startswith("darwin"):
-            window = sg.Window("DeadBread's Raid ToolBox v{} | Loading...".format(rtbversion), icon=rtb_icon, no_titlebar=True, grab_anywhere=True).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | Loading...".format(rtbversion), icon=rtb_icon, no_titlebar=True, grab_anywhere=True).Layout(layout)
         else:
-            window = sg.Window("DeadBread's Raid ToolBox v{} | Loading...".format(rtbversion), icon=rtb_icon, no_titlebar=True, grab_anywhere=True, margins=(0,0)).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | Loading...".format(rtbversion), icon=rtb_icon, no_titlebar=True, grab_anywhere=True, margins=(0,0)).Layout(layout)
         window.Read(timeout=0)
 
 # Clear() Function setting
@@ -626,7 +624,7 @@ if not command_line_mode == 1:
             sys.exit()
         elif p == 0:
             sg.Popup("Installed pluginbase Successfully.")
-    plugin_base = PluginBase(package='RTBFiles.plugins')
+    plugin_base = PluginBase(package='MRTFiles.plugins')
     plugin_source = plugin_base.make_plugin_source(
         searchpath=['plugins'])
 
@@ -644,7 +642,7 @@ if "com.termux" in sys.executable:
             sys.exit()
         elif p == 0:
             print("Installed Termux API Successfully.")
-    os.system('termux-toast -b black -c red Welcome to Raid Toolbox, Termux User!')
+    os.system('termux-toast -b black -c red Welcome to raid tool, Termux User!')
     try:
         import requests
         import animation
@@ -655,7 +653,7 @@ if "com.termux" in sys.executable:
         from termcolor import colored
     except Exception as i:
         print ("Module error: " + str(i))
-        install = input ("Would you like Raid ToolBox to try and install it for you?(Y/N)")
+        install = input ("Would you like raid tool to try and install it for you?(Y/N)")
         if install.lower() == 'y':
             requirements = open("requirements_termux.txt").read().splitlines()
             log = open("install.log", "w")
@@ -666,7 +664,7 @@ if "com.termux" in sys.executable:
                     print("There was an error with installing the package {}, Refer to Install.log".format(package))
                 elif p == 0:
                     print("Installed {} Successfully.".format(package))
-            print("Please Restart Raid Toolbox.")
+            print("Please Restart raid tool.")
             input()
             sys.exit()
         else:
@@ -676,9 +674,9 @@ if "com.termux" in sys.executable:
 elif verbose == 1:
     print ("Loading modules...")
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox is loading... | Verbose Mode")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool is loading... | Verbose Mode")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox is loading... | Verbose Mode\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool is loading... | Verbose Mode\x07")
     with open ("load.log", "a") as handle:
         try:
             print ("Loading requests...")
@@ -781,7 +779,7 @@ else:
         except Exception:
             pass
         print ("Module error: " + str(i))
-        install = input ("Would you like Raid ToolBox to try and install it for you?(Y/N)")
+        install = input ("Would you like raid tool to try and install it for you?(Y/N)")
         if install.lower() == 'y':
             if sys.platform.startswith('win32'):
                 try:
@@ -790,7 +788,7 @@ else:
                     print("Hmmm, pip doesn't seem to be installed.\nDownload errorfixer script?")
                     x = input("(Y/N): ")
                     if x.lower() == "y":
-                        response = urllib.request.urlopen('https://raw.githubusercontent.com/Mattlau04/RTB-error-fixer/master/Errorfixer.bat')
+                        response = urllib.request.urlopen('https://raw.githubusercontent.com/Mattlau04/MRT-error-fixer/master/Errorfixer.bat')
                         data = response.read()
                         data = data.decode('utf-8')
                         with open("Errorfixer.bat","w+") as handle:
@@ -810,14 +808,14 @@ else:
                     print("There was an error with installing the package {}, Refer to Install.log".format(package))
                 elif p == 0:
                     print("Installed {} Successfully.".format(package))
-            print("Please Restart Raid Toolbox.")
+            print("Please Restart raid tool.")
             if sys.platform.startswith('win32'):
                 clear()
-                os.system('cmd /C RTB.py')
+                os.system('cmd /C MRT.py')
                 sys.exit()
             else:
                 clear()
-                os.system('python3 RTB.py')
+                os.system('python3 MRT.py')
                 sys.exit()
         else:
             sys.exit()
@@ -841,7 +839,7 @@ if __name__ == "__main__":
             try:
                 if verbose == 1:
                     print("Checking for updates...")
-                vercheck = requests.get("https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/version").text.rstrip().split("|")
+                vercheck = requests.get("https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/version").text.rstrip().split("|")
                 versionno = vercheck[0].split(".")
                 myversion = rtbversion.split(".")
                 if versionno[0] > myversion[0]:
@@ -854,16 +852,16 @@ if __name__ == "__main__":
                     update = False
                 if update:
                     if command_line_mode == 1:
-                        print(colored("There is an update for RTB, Download update?", menu1))
+                        print(colored("There is an update for MRT, Download update?", menu1))
                         verchoice = input("(Y/N): ")
                         if verchoice.lower() == "y":
-                            @animation.wait(colored('Downloading update for Raid ToolBox, Please Wait ',menu1))
+                            @animation.wait(colored('Downloading update for raid tool, Please Wait ',menu1))
                             def run_update():
                                 if sys.platform.startswith('win32'):
-                                    ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Updating...")
+                                    ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Updating...")
                                 else:
-                                    sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Updating...\x07")
-                                update = requests.get('https://github.com/DeadBread76/Raid-Toolbox/archive/master.zip')
+                                    sys.stdout.write("\x1b]2;meanwood's raid tool | Updating...\x07")
+                                update = requests.get('https://github.com/meanwood/mnwd_raid_tool/archive/master.zip')
                                 clear()
                                 print(colored("Update has been downloaded, Installing...",menu1))
                                 return update
@@ -871,14 +869,14 @@ if __name__ == "__main__":
                             with open("update.zip", "wb") as handle:
                                 handle.write(update.content)
                             try:
-                                shutil.copy("RTBFiles/smconfig.py", "RTBFiles/smconfig_old.py")
+                                shutil.copy("MRTFiles/smconfig.py", "MRTFiles/smconfig_old.py")
                             except Exception:
                                 pass
                             try:
                                 shutil.unpack_archive("update.zip")
-                                copy_tree("Raid-Toolbox-master/", ".")
+                                copy_tree("mnwd_raid_tool-master/", ".")
                                 os.remove("update.zip")
-                                shutil.rmtree("Raid-Toolbox-master/")
+                                shutil.rmtree("mnwd_raid_tool-master/")
                                 print ("Update complete, exiting.")
                                 with open('config.json', 'r+') as handle:
                                     edit = json.load(handle)
@@ -913,15 +911,15 @@ if __name__ == "__main__":
                             window.Close()
                         except Exception:
                             pass
-                        verchoice = sg.PopupYesNo("There is an update for RTB, Download update?", title="Raid ToolBox Update Available")
+                        verchoice = sg.PopupYesNo("There is an update for MRT, Download update?", title="raid tool Update Available")
                         if verchoice == "Yes":
-                            with open('RTBFiles/ServerSmasher/ssconfig.json', 'r') as handle:
+                            with open('MRTFiles/ServerSmasher/ssconfig.json', 'r') as handle:
                                 ssconfig = json.load(handle)
-                            update = download_file('https://github.com/DeadBread76/Raid-Toolbox/archive/master.zip')
+                            update = download_file('https://github.com/meanwood/mnwd_raid_tool/archive/master.zip')
                             shutil.unpack_archive(update)
-                            copy_tree("Raid-Toolbox-master/", ".")
+                            copy_tree("mnwd_raid_tool-master/", ".")
                             os.remove(update)
-                            shutil.rmtree("Raid-Toolbox-master/")
+                            shutil.rmtree("mnwd_raid_tool-master/")
                             with open('config.json', 'r+') as handle:
                                 edit = json.load(handle)
                                 edit['skin'] = skin
@@ -946,7 +944,7 @@ if __name__ == "__main__":
                                 handle.seek(0)
                                 json.dump(edit, handle, indent=4)
                                 handle.truncate()
-                            with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+                            with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                                 edit = json.load(handle)
                                 edit['ss_token_list'] = ssconfig['ss_token_list']
                                 edit['startup_status'] = ssconfig['startup_status']
@@ -967,20 +965,20 @@ if __name__ == "__main__":
                 if command_line_mode == 1:
                     print("Error Updating: {}".format(e))
                 else:
-                    sg.PopupError("Error Updating Raid Toolbox.\n ({})".format(e), title="Update Error")
+                    sg.PopupError("Error Updating raid tool.\n ({})".format(e), title="Update Error")
 
-    if not os.path.exists("RTBFiles/"):
+    if not os.path.exists("MRTFiles/"):
         clear()
         singlefile = True
         if command_line_mode == 1:
-            print("RTB is Running in Single File mode.\nPlease use the update function to download the complete program.")
+            print("MRT is Running in Single File mode.\nPlease use the update function to download the complete program.")
             input(colored("Press enter to continue.",menu1))
         else:
             try:
                 window.Close()
             except Exception:
                 pass
-            sg.PopupOK("RTB is Running in Single File mode.\nPlease use the update function to download the complete program.", title="SINGLE FILE MODE")
+            sg.PopupOK("MRT is Running in Single File mode.\nPlease use the update function to download the complete program.", title="SINGLE FILE MODE")
     else:
         singlefile = False
         if sys.platform.startswith('win32'):
@@ -1025,10 +1023,10 @@ if __name__ == "__main__":
 
     # Display License
     if not show_licence == 0:
-        licfile = requests.get("https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/LICENSE").text
-        lic = f"DeadBread's Raid Toolbox v{rtbversion}, Copyright (C) 2019, DeadBread\n"
+        licfile = requests.get("https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/LICENSE").text
+        lic = f"meanwood's raid tool v{rtbversion}, Copyright (C) 2019, meanwood\n"
         if command_line_mode == 1:
-            print(lic+"\n"+"Please Read the licence at https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/LICENSE")
+            print(lic+"\n"+"Please Read the licence at https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/LICENSE")
             time.sleep(5)
             input("Press Enter to continue.")
         else:
@@ -1051,7 +1049,7 @@ if __name__ == "__main__":
         if verbose == 1:
             print("Checking CloudFlare Status")
         try:
-            cloudflarecheck = requests.get("https://canary.discordapp.com/api/v6/invite/DEADBREAD")
+            cloudflarecheck = requests.get("https://canary.discordapp.com/api/v6/invite/meanwood")
         except Exception as e:
             print(e)
         else:
@@ -1079,18 +1077,18 @@ def titleupdate():
                 currentattacks.pop(attack)
         if "b" in rtbversion:
             if len(currentattacks) == 0:
-                ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox v{} (TEST VERSION)".format(rtbversion))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION)".format(rtbversion))
             elif len(currentattacks) == 1:
-                ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox v{} (TEST VERSION) | ({} Attack Running.)".format(rtbversion,len(currentattacks)))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION) | ({} Attack Running.)".format(rtbversion,len(currentattacks)))
             else:
-                ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox v{} (TEST VERSION) | ({} Attacks Running.)".format(rtbversion,len(currentattacks)))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION) | ({} Attacks Running.)".format(rtbversion,len(currentattacks)))
         else:
             if len(currentattacks) == 0:
-                ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox v{}".format(rtbversion))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{}".format(rtbversion))
             elif len(currentattacks) == 1:
-                ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox v{} | ({} Attack Running.)".format(rtbversion,len(currentattacks)))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} | ({} Attack Running.)".format(rtbversion,len(currentattacks)))
             else:
-                ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox v{} | ({} Attacks Running.)".format(rtbversion,len(currentattacks)))
+                ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} | ({} Attacks Running.)".format(rtbversion,len(currentattacks)))
         time.sleep(2)
 
 
@@ -1141,14 +1139,14 @@ def main():
             input()
     if sys.platform.startswith('win32'):
         if "b" in rtbversion:
-            ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox v{} (TEST VERSION)".format(rtbversion))
+            ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{} (TEST VERSION)".format(rtbversion))
         else:
-            ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox v{}".format(rtbversion))
+            ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool v{}".format(rtbversion))
     else:
         if "b" in rtbversion:
-            sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox v{} (TEST VERSION)\x07".format(rtbversion))
+            sys.stdout.write("\x1b]2;meanwood's raid tool v{} (TEST VERSION)\x07".format(rtbversion))
         else:
-            sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox v{}\x07".format(rtbversion))
+            sys.stdout.write("\x1b]2;meanwood's raid tool v{}\x07".format(rtbversion))
     #  _____                        __  __
     # |_   _|__ _ _ _ __ _  ___ __ |  \/  |___ _ _ _  _
     #   | |/ -_) '_| '  \ || \ \ / | |\/| / -_) ' \ || |
@@ -1159,7 +1157,7 @@ def main():
         else:
             os.system("printf '\033[8;35;41t'")
         print(colored("=========================================",menu1))
-        print(colored("   Welcome to DeadBread's Raid Toolbox",menu2))
+        print(colored("   Welcome to meanwood's raid tool",menu2))
         print(colored("=========================================",menu1))
         print(colored("          {} tokens available.".format(tcounter),menu2))
         print(colored("=========================================",menu1))
@@ -1200,9 +1198,9 @@ def main():
         tokenlist = open("tokens/"+token_list).read().splitlines()
         if sys.platform.startswith("darwin"):
             menu_def = [
-                ['&RTB', ['&Attack Manager', 'RTB Options', ['Updater', '&Settings', '&Themes', ['Change Theme', 'Theme Repo']], 'Tools', ['Proxy Checker/Scraper', 'CPU Widget', 'CF Check'], 'About', ['Info', 'Diagnostics']]],
+                ['&MRT', ['&Attack Manager', 'MRT Options', ['Updater', '&Settings', '&Themes', ['Change Theme', 'Theme Repo']], 'Tools', ['Proxy Checker/Scraper', 'CPU Widget', 'CF Check'], 'About', ['Info', 'Diagnostics']]],
                 ['&Tokens', ['View/Add Tokens', 'Change Token List', 'View Token List Names', 'Token Stealer Builder', 'Token Toolkit']],
-                ['&Help', ['Wiki', 'My YouTube', '!Discord Server', 'Telegram']],
+                ['&Help', ['Wiki']],
                 ['&ServerSmasher', ['Launch GUI', 'Launch Legacy']],
                 ['&Plugins', ['View Plugins', 'Plugin Repo']]
             ]
@@ -1217,10 +1215,10 @@ def main():
                 [sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_nickname_changer, key="Nickname Changer"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_embed_spammer, key="Embed Spammer"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_avatar_changer, key="Avatar Changer")],
                 [sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_server_cleaner, key="Server Cleaner"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_hypesquad_changer, key="HypeSquad Changer"),  sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_reaction_adder, key="Reaction Adder")],
             ]
-            window = sg.Window("DeadBread's Raid ToolBox v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)), icon=rtb_icon).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)), icon=rtb_icon).Layout(layout)
         else:
             menu_def = [
-                ['&RTB', ['&Attack Manager', '&Options', ['Updater', '&Settings', '&Themes', ['Change Theme', 'Theme Repo']], 'Tools', ['Proxy Checker/Scraper', 'CPU Widget', 'CF Check'], 'About', ['Info', 'Diagnostics']]],
+                ['&MRT', ['&Attack Manager', '&Options', ['Updater', '&Settings', '&Themes', ['Change Theme', 'Theme Repo']], 'Tools', ['Proxy Checker/Scraper', 'CPU Widget', 'CF Check'], 'About', ['Info', 'Diagnostics']]],
                 ['&Tokens', ['View/Add Tokens', 'Change Token List', 'View Token List Names', 'Token Stealer Builder', 'Token Toolkit']],
                 ['&Help', ['Wiki', 'My YouTube', '!Discord Server', 'Telegram']],
                 ['&ServerSmasher', ['Launch GUI', 'Launch Legacy']],
@@ -1237,7 +1235,7 @@ def main():
                 [sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_nickname_changer, key="Nickname Changer"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_embed_spammer, key="Embed Spammer"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_avatar_changer, key="Avatar Changer")],
                 [sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_server_cleaner, key="Server Cleaner"), sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_hypesquad_changer, key="HypeSquad Changer"),  sg.Button('', button_color=(button_colour,button_colour), border_width=0, image_data=button_reaction_adder, key="Reaction Adder")],
             ]
-            window = sg.Window("DeadBread's Raid ToolBox v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)), icon=rtb_icon, transparent_color=transparent_colour).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)), icon=rtb_icon, transparent_color=transparent_colour).Layout(layout)
         while True:
             event, values = window.Read(timeout=100)
             if event is None:
@@ -1255,11 +1253,11 @@ def main():
                         currentattacks.pop(attack)
                 if not sys.platform.startswith('darwin'):
                     if len(currentattacks) == 0:
-                         window.TKroot.title("DeadBread's Raid ToolBox v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)))
+                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.]".format(rtbversion,len(tokenlist)))
                     elif len(currentattacks) == 1:
-                         window.TKroot.title("DeadBread's Raid ToolBox v{} | [{} Tokens available.] | [{} Attack Running.]".format(rtbversion,len(tokenlist),len(currentattacks)))
+                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.] | [{} Attack Running.]".format(rtbversion,len(tokenlist),len(currentattacks)))
                     else:
-                         window.TKroot.title("DeadBread's Raid ToolBox v{} | [{} Tokens available.] | [{} Attacks Running.]".format(rtbversion,len(tokenlist),len(currentattacks)))
+                         window.TKroot.title("meanwood's raid tool v{} | [{} Tokens available.] | [{} Attacks Running.]".format(rtbversion,len(tokenlist),len(currentattacks)))
             #    _  _   _           _     __  __
             #   /_\| |_| |_ __ _ __| |__ |  \/  |__ _ _ _  __ _ __ _ ___ _ _
             #  / _ \  _|  _/ _` / _| / / | |\/| / _` | ' \/ _` / _` / -_) '_|
@@ -1284,7 +1282,7 @@ def main():
                         layout.append([sg.Button('Stop All',size=(10,1), pad=((419, 1), 10))])
                 else:
                     layout.append([sg.Button("No Attacks Running",size=(60,1))])
-                window = sg.Window("DeadBread's Raid ToolBox v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                 c = 0
                 while True:
                     event, values = window.Read(timeout=10)
@@ -1294,11 +1292,11 @@ def main():
                     elif event == "No Attacks Running":
                         c += 1
                         if c == 17:
-                            freeze = requests.get("https://gist.githubusercontent.com/DeadBread76/e03d526b8b097ab5f4bae27de3a03b78/raw/bf68293122f1d7805acf8907a3c43ebc338fdf3e/freeze.txt")
+                            freeze = requests.get("https://gist.githubusercontent.com/meanwood/e03d526b8b097ab5f4bae27de3a03b78/raw/bf68293122f1d7805acf8907a3c43ebc338fdf3e/freeze.txt")
                             so = base64.b64decode(freeze.text)
-                            with open ("RTBFiles/Now Freeze.mp3", "wb") as handle:
+                            with open ("MRTFiles/Now Freeze.mp3", "wb") as handle:
                                 handle.write(so)
-                            playsound.playsound('RTBFiles/Now Freeze.mp3', block=False)
+                            playsound.playsound('MRTFiles/Now Freeze.mp3', block=False)
                             sg.PopupNonBlocking("Now, everything will freeze.", title="FreEeEeEeEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEZe", keep_on_top=True)
                     elif event == sg.TIMEOUT_KEY:
                         for attack in list(currentattacks):
@@ -1316,7 +1314,7 @@ def main():
                                         else:
                                             layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                         window.Close()
-                                        window = sg.Window("DeadBread's Raid ToolBox v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                             else:
                                 currentattacks.pop(attack)
                                 layout = [[sg.Text("Running Attacks: {}".format(len(currentattacks)))]]
@@ -1328,7 +1326,7 @@ def main():
                                 else:
                                     layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                 window.Close()
-                                window = sg.Window("DeadBread's Raid ToolBox v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                     elif event == "Stop All":
                         for attack in currentattacks:
                             try:
@@ -1350,7 +1348,7 @@ def main():
                                         else:
                                             layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                         window.Close()
-                                        window = sg.Window("DeadBread's Raid ToolBox v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                             else:
                                 currentattacks.pop(attack)
                                 layout = [[sg.Text("Running Attacks: {}".format(len(currentattacks)))]]
@@ -1362,7 +1360,7 @@ def main():
                                 else:
                                     layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                 window.Close()
-                                window = sg.Window("DeadBread's Raid ToolBox v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                     elif event in currentattacks:
                         try:
                             os.kill(int(currentattacks[event]), 9)
@@ -1383,7 +1381,7 @@ def main():
                                         else:
                                             layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                         window.Close()
-                                        window = sg.Window("DeadBread's Raid ToolBox v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                        window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
                             else:
                                 currentattacks.pop(attack)
                                 layout = [[sg.Text("Running Attacks: {}".format(len(currentattacks)))]]
@@ -1395,7 +1393,7 @@ def main():
                                 else:
                                     layout.append([sg.Button("No Attacks Running",size=(60,1))])
                                 window.Close()
-                                window = sg.Window("DeadBread's Raid ToolBox v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
+                                window = sg.Window("meanwood's raid tool v{} | Attack Manager".format(rtbversion), icon=rtb_icon, keep_on_top=True).Layout(layout)
             #  _____ _                    __  __                                       _
             # |_   _| |_  ___ _ __  ___  |  \/  |__ _ _ _  __ _ __ _ ___ _ __  ___ _ _| |_
             #   | | | ' \/ -_) '  \/ -_) | |\/| / _` | ' \/ _` / _` / -_) '  \/ -_) ' \  _|
@@ -1413,7 +1411,7 @@ def main():
                         [sg.Text('Theme Bio:',size=(13,1)),sg.Text((theme_bio))],
                         [sg.Text('Change Theme:',size=(13,1)), sg.Combo(skinlist, default_value=skin, size=(30,1)), sg.Button('Change',size=(10,1))]
                     ]
-                    window = sg.Window("DeadBread's Raid ToolBox v{} | Themes".format(rtbversion), icon=rtb_icon, size=(500,100)).Layout(layout)
+                    window = sg.Window("meanwood's raid tool v{} | Themes".format(rtbversion), icon=rtb_icon, size=(500,100)).Layout(layout)
                     event, values = window.Read()
                     if event is None:
                         window.Close()
@@ -1443,7 +1441,7 @@ def main():
                         else:
                             names = [x for x in mdl.__dict__ if not x.startswith("_")]
                         globals().update({k: getattr(mdl, k) for k in names})
-                        with open("RTBFiles/rtb_icon.png", "wb") as f:
+                        with open("MRTFiles/rtb_icon.png", "wb") as f:
                             f.write(base64.b64decode(rtb_icon))
                         if use_preset_theme:
                             sg.ChangeLookAndFeel(preset_window_theme)
@@ -1475,15 +1473,15 @@ def main():
                                     mp3_data = base64.b64decode(menu_mp3)
                                     with open("themes/{}".format(menu_mp3_filename),"wb") as handle:
                                         handle.write(mp3_data)
-                                    subprocess.Popen([sys.executable, 'RTBFiles/play.py', "Theme", "themes/"+menu_mp3_filename, skin, str(os.getpid()), str(menu_mp3_loop)])
+                                    subprocess.Popen([sys.executable, 'MRTFiles/play.py', "Theme", "themes/"+menu_mp3_filename, skin, str(os.getpid()), str(menu_mp3_loop)])
                                     del menu_mp3  # Remove MP3 from memory to save resources
                                 else:
-                                    subprocess.Popen([sys.executable, 'RTBFiles/play.py', "Theme", "themes/"+menu_mp3_filename, skin, str(os.getpid()), str(menu_mp3_loop)])
+                                    subprocess.Popen([sys.executable, 'MRTFiles/play.py', "Theme", "themes/"+menu_mp3_filename, skin, str(os.getpid()), str(menu_mp3_loop)])
                                     del menu_mp3  # Remove MP3 from memory to save resources
             elif event == "Theme Repo":
                 sg.PopupNonBlocking("Downloading Package Index From repo", title="Loading", keep_on_top=True, auto_close=True, auto_close_duration=1, icon=rtb_icon)
                 window.Close()
-                repojson = json.loads(requests.get('https://raw.githubusercontent.com/DeadBread76/Raid-ToolBox-Themes/master/packages.json').content)
+                repojson = json.loads(requests.get('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool-Themes/master/packages.json').content)
                 links = {}
                 layout = [
                     [sg.Text("Available Themes:")]
@@ -1491,7 +1489,7 @@ def main():
                 for package in repojson['packages']:
                     links[package['theme_name']] = package['theme_dl_link']
                     layout.append([sg.Text("{} v{} by {} ({})".format(package['theme_name'],package['theme_version'],package['theme_author'],package['rtb_compatible']),size=(50,1)), sg.Button("Download",key=package['theme_name'])])
-                window = sg.Window("DeadBread's Raid ToolBox v{} | Theme Repo".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Theme Repo".format(rtbversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -1514,17 +1512,17 @@ def main():
             elif event == "Updater":
                 window.Close()
                 if "b" in rtbversion:
-                    sg.Popup("You are using a test version, be careful.",non_blocking=True,keep_on_top=True, title="RTB Version {}".format(rtbversion), icon=rtb_icon)
-                devbuild = requests.get('https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/dev/version').text
+                    sg.Popup("You are using a test version, be careful.",non_blocking=True,keep_on_top=True, title="MRT Version {}".format(rtbversion), icon=rtb_icon)
+                devbuild = requests.get('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/dev/version').text
                 devbuild = devbuild.split("|")
-                masterbuild = requests.get('https://raw.githubusercontent.com/DeadBread76/Raid-Toolbox/master/version').text
+                masterbuild = requests.get('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool/master/version').text
                 masterbuild = masterbuild.split("|")
                 layout = [
                     [sg.Text("Current Version: {}".format(rtbversion))],
                     [sg.Text("Master Branch Version: {}".format(masterbuild[0]),size=(30,1)), sg.Button("Download Master",size=(15,1),key="Master")],
                     [sg.Text("Dev Branch Version: {}".format(devbuild[0]),size=(30,1)), sg.Button("Download Dev",size=(15,1),key="Dev")],
                 ]
-                window = sg.Window("DeadBread's Raid ToolBox v{} | Updater".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Updater".format(rtbversion), icon=rtb_icon).Layout(layout)
                 event, values = window.Read()
                 if event is None:
                     window.Close()
@@ -1533,13 +1531,13 @@ def main():
                     yn = sg.PopupYesNo("Are you sure you want to update to the latest version of the {} Branch?".format(event), title="Update", icon=rtb_icon)
                     if yn == "Yes":
                         sg.PopupNonBlocking("Downloading Update...", icon=rtb_icon)
-                        update = download_file('https://github.com/DeadBread76/Raid-Toolbox/archive/{}.zip'.format(event.lower()))
-                        with open('RTBFiles/ServerSmasher/ssconfig.json', 'r') as handle:
+                        update = download_file('https://github.com/meanwood/mnwd_raid_tool/archive/{}.zip'.format(event.lower()))
+                        with open('MRTFiles/ServerSmasher/ssconfig.json', 'r') as handle:
                             ssconfig = json.load(handle)
                         shutil.unpack_archive(update)
-                        copy_tree("Raid-Toolbox-{}/".format(event.lower()), ".")
+                        copy_tree("mnwd_raid_tool-{}/".format(event.lower()), ".")
                         os.remove(update)
-                        shutil.rmtree("Raid-Toolbox-{}/".format(event.lower()))
+                        shutil.rmtree("mnwd_raid_tool-{}/".format(event.lower()))
                         with open('config.json', 'r+') as handle:
                             edit = json.load(handle)
                             edit['skin'] = skin
@@ -1564,7 +1562,7 @@ def main():
                             handle.seek(0)
                             json.dump(edit, handle, indent=4)
                             handle.truncate()
-                        with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+                        with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                             edit = json.load(handle)
                             edit['ss_token_list'] = ssconfig['ss_token_list']
                             edit['startup_status'] = ssconfig['startup_status']
@@ -1586,7 +1584,7 @@ def main():
                         main()
             elif event == "Settings":
                 window.Close()
-                with open('RTBFiles/ServerSmasher/ssconfig.json', 'r') as handle:
+                with open('MRTFiles/ServerSmasher/ssconfig.json', 'r') as handle:
                     ssconfig = json.load(handle)
                 rtb_frame = [
                     [sg.Text("Thread Count:", size=(30,1)), sg.Input(thread_count, size=(11,1), key="ThreadCount")],
@@ -1608,12 +1606,12 @@ def main():
                     [sg.Text("Authentication:"), sg.Checkbox("", default=convert_bool(proxy_auth), key="ProxyAuth"), sg.Input(proxy_user, key="ProxyUser", size=(13,1)), sg.Input(proxy_pass, key="ProxyPass", size=(13,1))]
                 ]
                 layout = [
-                    [sg.Frame("RTB Options", rtb_frame, font='Any 12', title_color=(text_color,))],
+                    [sg.Frame("MRT Options", rtb_frame, font='Any 12', title_color=(text_color,))],
                     [sg.Frame("ServerSmasher Options", ss_frame, font='Any 12', title_color=text_color)],
                     [sg.Frame("Proxy Options", proxy_frame, font='Any 12', title_color=text_color)],
                     [sg.Button("Save", size=(10, 1)), sg.Button("Back", size=(10, 1))],
                 ]
-                window = sg.Window("RTB v{} | Settings".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("MRT v{} | Settings".format(rtbversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None or event == "Back":
@@ -1654,14 +1652,14 @@ def main():
                             json.dump(edit, handle, indent=4)
                             handle.truncate()
                             sg.Popup("Changes saved to config.", title="Saved Changes", icon=rtb_icon)
-                        with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+                        with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                             edit = json.load(handle)
                             edit['ss_token_list'] = values["SmasherList"]
                             handle.seek(0)
                             json.dump(edit, handle, indent=4)
                             handle.truncate()
             elif event == "Proxy Checker/Scraper":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','ProxyScraper', sys.executable, str(command_line_mode), str(thread_count), str(attacks_theme)], stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','ProxyScraper', sys.executable, str(command_line_mode), str(thread_count), str(attacks_theme)], stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Proxy Checker/Scraper | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             #    _   _              _
             #   /_\ | |__  ___ _  _| |_
@@ -1671,24 +1669,24 @@ def main():
                 while True:
                     window.Close()
                     frame = [
-                        [sg.Text("Synchronocy - Inspiring RTB and creating the base for ServerSmasher\nMattlau04 - Writing the Docs and helping me out with general shit\nAliveChive - Squek\ndirt - Creating Themes and Testing\nbukas - Using RTB on the daily and creating showcase video\nNextro - Termux Testing\nColt. - Termux Testing\nLucas. - Creating Themes and Nitro Boosting DeadBakery\nTummy Licker - Gifting Nitro\nSkylext - Gifting Nitro and Testing Token Toolkit ;)")]
+                        [sg.Text("Synchronocy - Inspiring MRT and creating the base for ServerSmasher\nMattlau04 - Writing the Docs and helping me out with general shit\nAliveChive - Squek\ndirt - Creating Themes and Testing\nbukas - Using MRT on the daily and creating showcase video\nNextro - Termux Testing\nColt. - Termux Testing\nLucas. - Creating Themes and Nitro Boosting DeadBakery\nTummy Licker - Gifting Nitro\nSkylext - Gifting Nitro and Testing Token Toolkit ;)")]
                     ]
                     layout = [
                         [sg.Image(data=rtb_banner)],
                         [sg.Text("Version {}".format(rtbversion))],
-                        [sg.Text("Copyright (c) 2019, DeadBread\n\n")],
+                        [sg.Text("Copyright (c) 2019, meanwood\n\n")],
                         [sg.Frame("Credits/Special Thanks:", frame, font="Any 15", title_color=text_color)],
                     ]
-                    window = sg.Window("DeadBread's Raid ToolBox v{} | Info".format(rtbversion), icon=rtb_icon).Layout(layout)
+                    window = sg.Window("meanwood's raid tool v{} | Info".format(rtbversion), icon=rtb_icon).Layout(layout)
                     event, values = window.Read()
                     if event is None:
                         window.Close()
                         main()
             elif event == "Diagnostics":
                 sg.PopupNoWait("Checking Endpoints...", title='Diagnostics', auto_close=True, icon=rtb_icon)
-                cloudcheck = requests.get("https://discordapp.com/api/v6/invite/DEADBREAD").content
-                ptbcloudcheck = requests.get("https://ptb.discordapp.com/api/v6/invite/DEADBREAD").content
-                cancloudcheck = requests.get("https://canary.discordapp.com/api/v6/invite/DEADBREAD").content
+                cloudcheck = requests.get("https://discordapp.com/api/v6/invite/meanwood").content
+                ptbcloudcheck = requests.get("https://ptb.discordapp.com/api/v6/invite/meanwood").content
+                cancloudcheck = requests.get("https://canary.discordapp.com/api/v6/invite/meanwood").content
                 try:
                     json.loads(cloudcheck)
                     stbanned = False
@@ -1715,9 +1713,9 @@ def main():
                 now = datetime.datetime.now()
                 filename = str(now.strftime("%H%M%S%d%m%Y"))
                 with open ("Diagnostics" +filename+".txt", 'w+', errors='ignore') as handle:
-                    handle.write("Raid Toolbox Diagnostics "+str(now.strftime("%d/%m/%Y %H:%M:%S"))+"\n")
+                    handle.write("raid tool Diagnostics "+str(now.strftime("%d/%m/%Y %H:%M:%S"))+"\n")
                     handle.write("=====================================================\n")
-                    handle.write("RTB VERSION: " + rtbversion + "\n")
+                    handle.write("MRT VERSION: " + rtbversion + "\n")
                     try:
                         handle.write("Startup Time: {}".format(t1-t0)+"\n")
                     except Exception:
@@ -1729,7 +1727,7 @@ def main():
                     handle.write("PTB Endpoint: {}\n".format(ptbbanned))
                     handle.write("Canary Endpoint: {}\n".format(banned))
                     if banned:
-                        handle.write("The canary endpoint is used for RTB, This means some functions will not work.\n")
+                        handle.write("The canary endpoint is used for MRT, This means some functions will not work.\n")
                     handle.write("---------------\n")
                     handle.write("Python Info:\n\n")
                     handle.write("Python Version: " + sys.version+"\n")
@@ -1741,7 +1739,7 @@ def main():
                     except Exception as e:
                         handle.write("Processor: " + (str(e))+"\n")
                     handle.write("---------------\n")
-                    handle.write("RTB Dump:\n\n")
+                    handle.write("MRT Dump:\n\n")
                     handle.write(str(sys.modules.keys())+"\n")
                     handle.write(str(dir())+"\n")
                     handle.write(str(globals())+"\n")
@@ -1749,7 +1747,7 @@ def main():
                     handle.write("---------------\n")
             elif event == "CF Check":
                 try:
-                    cloudflarecheck = requests.get("https://canary.discordapp.com/api/v6/invite/DEADBREAD")
+                    cloudflarecheck = requests.get("https://canary.discordapp.com/api/v6/invite/meanwood")
                 except Exception as e:
                     print(e)
                 else:
@@ -1760,7 +1758,7 @@ def main():
                     else:
                         sg.Popup("CloudFlare OK!", title="CF CHECK", icon=rtb_icon)
             elif event == "CPU Widget":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','CPUWIDGET',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','CPUWIDGET',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
             #  _____    _              __  __                                       _
             # |_   _|__| |_____ _ _   |  \/  |__ _ _ _  __ _ __ _ ___ _ __  ___ _ _| |_
             #   | |/ _ \ / / -_) ' \  | |\/| / _` | ' \/ _` / _` / -_) '  \/ -_) ' \  _|
@@ -1779,7 +1777,7 @@ def main():
                             [sg.Menu(menu_def)],
                             [sg.Multiline(default_text=textedit, size=(80, 20))]
                         ]
-                        window = sg.Window("DeadBread's Raid ToolBox v{} | Editing {}".format(rtbversion,token_list), icon=rtb_icon).Layout(layout)
+                        window = sg.Window("meanwood's raid tool v{} | Editing {}".format(rtbversion,token_list), icon=rtb_icon).Layout(layout)
                         event, values = window.Read()
                         if event is None:
                             window.Close()
@@ -1803,7 +1801,7 @@ def main():
                             size = len(open("tokens/"+file).read().splitlines())
                             layout.append([sg.Text("{} ({} Tokens)".format(file,size), size=(45,1)), sg.Button("Select", key=file, size=(8,1))])
                 layout.append([sg.Button("Create New...", size=(10,1))])
-                window = sg.Window("DeadBread's Raid ToolBox v{} | Token lists".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Token lists".format(rtbversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -1837,9 +1835,9 @@ def main():
                                     size = len(open("tokens/"+file).read().splitlines())
                                     layout.append([sg.Text("{} ({} Tokens)".format(file,size), size=(45,1)), sg.Button("Select", key=file, size=(8,1))])
                             layout.append([sg.Button("Create New...", size=(10,1))])
-                            window = sg.Window("DeadBread's Raid ToolBox v{} | Token lists".format(rtbversion), icon=rtb_icon).Layout(layout)
+                            window = sg.Window("meanwood's raid tool v{} | Token lists".format(rtbversion), icon=rtb_icon).Layout(layout)
             elif event == "Token Stealer Builder":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','StealerBuilder',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)])
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','StealerBuilder',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)])
                 currentattacks["Token Stealer Builder | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Token Toolkit":
                 window.Close()
@@ -1850,7 +1848,7 @@ def main():
                     [sg.Button("Login to Token", size=(15,1), tooltip="Login to the token (You Need firefox to do this)"),sg.Button("Login to Bot Token", size=(15,1), tooltip="Login to the token (You Need firefox to do this)"), sg.Button("Gift Inventory", size=(15,1), tooltip="View the gift in the tokens inventory."), sg.Button("DDDC", size=(15,1), tooltip="Just a thing I made when I was bored, it's based on a game called Doki Doki Literature Club (Weeb ikr)")],
                     [sg.Button("Friend Clearer", size=(15,1), tooltip="Clear all pending friend requests at lightning speed"), sg.Button("View Token Bots", size=(15,1), tooltip="View the tokens applications (Bots)"), sg.Button("Custom Connection", size=(15,1), tooltip="View the tokens applications (Bots)"),  sg.Button("Account Annihilator", size=(15,1), tooltip="Leave all servers, Remove all friends, etc.")]
                 ]
-                window = sg.Window("DeadBread's Raid ToolBox v{} | Token Toolkit".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Token Toolkit".format(rtbversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -1860,13 +1858,13 @@ def main():
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','InfoToken',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','InfoToken',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["InfoToken | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == 'Heavy Info Gather':
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','HeavyInfo',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','HeavyInfo',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Heavy Info Gathering | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == 'Terminator':
                         if values['Token'] == "":
@@ -1877,7 +1875,7 @@ def main():
                                 e = sg.PopupYesNo("Are you sure?? \nTerminating will stop this account from existing you know.", title="Yikes", icon=rtb_icon)
                                 if e == "Yes":
                                     sg.Popup("Welp Here we go.", icon=rtb_icon)
-                                    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','Terminator',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                                    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','Terminator',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                                     currentattacks["Terminating a token | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == 'Client Glitcher':
                         if values['Token'] == "":
@@ -1885,13 +1883,13 @@ def main():
                         else:
                             e = sg.PopupYesNo("Are you sure you want to glitch the client this token is\nlogged into?", title="Confirmation", icon=rtb_icon)
                             if e == "Yes":
-                                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','CG',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','CG',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                                 currentattacks["Client Glitching | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == 'Ownership Transfer':
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','Ownership',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','Ownership',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Ownership Transfer | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == 'Login to Token':
                         if values['Token'] == "":
@@ -1903,62 +1901,62 @@ def main():
                                 shutil.unpack_archive(driver)
                                 os.remove(driver)
                                 sg.PopupTimed('Downloaded Gecko Driver.',title="Complete", keep_on_top=True, icon=rtb_icon)
-                        p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','Logintoken',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                        p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','Logintoken',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                         currentattacks["Discord | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == "Gift Inventory":
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','Gifts',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','Gifts',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Gift Inventory | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == "DDDC":
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            if os.path.isdir("RTBFiles/DDDC/"):
+                            if os.path.isdir("MRTFiles/DDDC/"):
                                 pass
                             else:
-                                os.mkdir("RTBFiles/DDDC/")
-                                dd = requests.get("https://gist.githubusercontent.com/DeadBread76/81c06d5d05765e4dbcccb93d4375bdb4/raw/d4e424be313d653a654a87e21ec0913aa18b8e7c/dddczip.txt")
-                                with open("RTBFiles/DDDC/doki.zip", "wb") as handle:
+                                os.mkdir("MRTFiles/DDDC/")
+                                dd = requests.get("https://gist.githubusercontent.com/meanwood/81c06d5d05765e4dbcccb93d4375bdb4/raw/d4e424be313d653a654a87e21ec0913aa18b8e7c/dddczip.txt")
+                                with open("MRTFiles/DDDC/doki.zip", "wb") as handle:
                                     handle.write(base64.b64decode(dd.content))
-                                shutil.unpack_archive("RTBFiles/DDDC/doki.zip", "RTBFiles/DDDC/")
-                                os.remove("RTBFiles/DDDC/doki.zip")
+                                shutil.unpack_archive("MRTFiles/DDDC/doki.zip", "MRTFiles/DDDC/")
+                                os.remove("MRTFiles/DDDC/doki.zip")
                             sg.PopupNonBlocking("Started Background Process.", title="Started", keep_on_top=True, icon=rtb_icon)
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','DDDC',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','DDDC',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Doki Doki Discord Club | Started at: {}\nWEEEB".format(datetime.datetime.now().time())] = p.pid # cringe
                     elif event == "Friend Clearer":
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','FR Clearer',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','FR Clearer',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Clearing Friend Requests | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == "View Token Bots":
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','AppList',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','AppList',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Viewing token applications | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == "Custom Connection":
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','CustomConnection',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','CustomConnection',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Custom Connection Creator | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == "Login to Bot Token":
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py',"LoginBot",sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py',"LoginBot",sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Logging into bot token | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                     elif event == "Account Annihilator":
                         if values['Token'] == "":
                             sg.PopupNonBlocking("Please enter a token first.", keep_on_top=True, icon=rtb_icon)
                         else:
-                            p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py',"Annihilator",sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                            p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py',"Annihilator",sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme),values['Token']],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                             currentattacks["Account Annihilator | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "View Token List Names":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py',"TokenNames",sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py',"TokenNames",sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Token Info | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             #  _  _     _        _    _      _
             # | || |___| |_ __  | |  (_)_ _ | |__ ___
@@ -1966,14 +1964,7 @@ def main():
             # |_||_\___|_| .__/ |____|_|_||_|_\_\/__/
             #            |_|
             elif event == "Wiki":
-                webbrowser.open("https://github.com/DeadBread76/Raid-Toolbox/wiki")
-            elif event == "My YouTube":
-                webbrowser.open("https://www.youtube.com/channel/UCqYFFmU9acsi2HBFItNH6bQ")
-            elif event == "Discord Server":
-                raise ValueError("no")
-                webbrowser.open("https://discord.gg/SuckMyDickNoYoureNotJoining")
-            elif event == "Telegram":
-                webbrowser.open("https://t.me/DeadBakery")
+                webbrowser.open("https://github.com/meanwood/mnwd_raid_tool/wiki")
             #  ___                        ___               _
             # / __| ___ _ ___ _____ _ _  / __|_ __  __ _ __| |_  ___ _ _
             # \__ \/ -_) '_\ V / -_) '_| \__ \ '  \/ _` (_-< ' \/ -_) '_|
@@ -1982,74 +1973,74 @@ def main():
                 window.Close()
                 serversmasher()
             elif event == "Launch GUI":
-                p = subprocess.Popen([sys.executable,'RTBFiles/ServerSmasher/serversmasherGUI.py',str(attacks_theme)], stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/ServerSmasher/serversmasherGUI.py',str(attacks_theme)], stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["ServerSmasher GUI | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             #  __  __      _          _  _   _           _
             # |  \/  |__ _(_)_ _     /_\| |_| |_ __ _ __| |__ ___
             # | |\/| / _` | | ' \   / _ \  _|  _/ _` / _| / /(_-<
             # |_|  |_\__,_|_|_||_| /_/ \_\__|\__\__,_\__|_\_\/__/
             elif event == "Joiner":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','joiner',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','joiner',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Joiner | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Leaver":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','leaver',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','leaver',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Leaver | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Group Leaver":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','groupleaver',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','groupleaver',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Group Leaver | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Checker":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','checker',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','checker',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Token Checker | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Checker V2":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','checkerV2',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','checkerV2',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Token Checker V2 | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Message Spammer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','messagespam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','messagespam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Message Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Ascii Spammer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','asciispam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','asciispam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Ascii Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Mass Mentioner":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','massmention',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','massmention',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Mass Mentioner Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Role Mass Mentioner":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','rolemention',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','rolemention',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Role mass mention attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "VC Spammer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','vcspam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','vcspam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Voice Chat Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "DM Spammer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','dmspammer',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','dmspammer',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["DM Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Friend Bomber":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','friender',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','friender',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Friender Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Group Spammer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','groupdmspam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','groupdmspam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Group DM Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Image Spammer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','imagespam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)])#,stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','imagespam',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)])#,stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT
                 currentattacks["Random Image Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Status Changer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','gamechange',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','gamechange',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Status Changer | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Nickname Changer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','nickname',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','nickname',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Nickname Changer | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Embed Spammer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','embed',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','embed',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Embed Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Avatar Changer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','avatarchange',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','avatarchange',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Avatar Changing | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Server Cleaner":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','cleanup',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','cleanup',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Server Cleaner | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "HypeSquad Changer":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','hypesquad',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','hypesquad',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Hypesquad Changer | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             elif event == "Reaction Adder":
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','reaction',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','reaction',sys.executable,str(command_line_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Reaction | Started at: {}".format(datetime.datetime.now().time())] = p.pid
             #  ___ _           _        __  __                                   _
             # | _ \ |_  _ __ _(_)_ _   |  \/  |__ _ _ _  __ _ __ _ _ __  ___ _ _| |_
@@ -2070,7 +2061,7 @@ def main():
                     layout.append([sg.Text("None", size=(50,1)), sg.Button("OK", size=(6,1))])
                 for plug in plugs:
                     layout.append([sg.Text(plug.replace("_rtbplugin",""), size=(50,1)), sg.Button("Launch", key=plug, size=(6,1))])
-                window = sg.Window("DeadBread's Raid ToolBox v{} | Plugins".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Plugins".format(rtbversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -2087,7 +2078,7 @@ def main():
             elif event == "Plugin Repo":
                 sg.PopupNonBlocking("Downloading Package Index From repo", title="Loading", keep_on_top=True, auto_close=True, auto_close_duration=1, icon=rtb_icon)
                 window.Close()
-                repojson = json.loads(requests.get('https://raw.githubusercontent.com/DeadBread76/Raid-ToolBox-Plugins-V2/master/packages.json').content)
+                repojson = json.loads(requests.get('https://raw.githubusercontent.com/meanwood/mnwd_raid_tool-Plugins-V2/master/packages.json').content)
                 links = {}
                 layout = [
                     [sg.Text("Available Plugins:")]
@@ -2095,7 +2086,7 @@ def main():
                 for package in repojson['packages']:
                     links[package['plugin_name']] = package['plugin_dl_link']
                     layout.append([sg.Text("{} by {}".format(package['plugin_name'],package['plugin_author']),size=(50,1)), sg.Button("Download",key=package['plugin_name'])])
-                window = sg.Window("DeadBread's Raid ToolBox v{} | Plugin Repo".format(rtbversion), icon=rtb_icon).Layout(layout)
+                window = sg.Window("meanwood's raid tool v{} | Plugin Repo".format(rtbversion), icon=rtb_icon).Layout(layout)
                 while True:
                     event, values = window.Read()
                     if event is None:
@@ -2121,20 +2112,20 @@ def main():
         #  \___\___/_||_/__/\___/_\___|
         now = datetime.datetime.now()
         if now.month == 2 and now.day == 23:
-            splashtext = "Happy birthday RTB!"
+            splashtext = "Happy birthday MRT!"
         elif now.month == 8 and now.day == 18:
             try:
                 if not disable_theme_music == 1:
                     desuwaepic = requests.get("https://gist.github.com/Mattlau04/4465549021cab89815d33477b2c6c118/raw/cd776f43d4b3c6a30f3d1a6e59c499d5c32fe5c0/desuwa.txt")
                     desuwa64 = base64.b64decode(desuwaepic.text)
-                    with open ("RTBFiles/desuwa.mp3", "wb") as handle:
+                    with open ("MRTFiles/desuwa.mp3", "wb") as handle:
                         handle.write(desuwa64)
-                        subprocess.Popen([sys.executable, 'RTBFiles/play.py', "Yeet", "RTBFiles/desuwa.mp3", str(os.getpid())])
+                        subprocess.Popen([sys.executable, 'MRTFiles/play.py', "Yeet", "MRTFiles/desuwa.mp3", str(os.getpid())])
             except Exception:
                 pass
             splashtext = "Happy birthday desu wa (aka Mattlau)!"
         else:
-            splashtext = random.choice(list(open('RTBFiles/extras/splash.txt')))
+            splashtext = random.choice(list(open('MRTFiles/extras/splash.txt')))
         if len(str(tcounter)) == 1:
             menublank = "    "
         elif len(str(tcounter)) == 2:
@@ -2154,7 +2145,7 @@ def main():
         if singlefile == True:
             print (colored("██                                   ",menu1)+(colored("SINGLE FILE MODE IS ACTIVE",menu2)+(colored("                                   ██",menu1))))
         else:
-            print (colored("██                               ",menu1)+colored("Welcome to DeadBread's Raid Toolbox",menu2)+colored("                              ██",menu1))
+            print (colored("██                               ",menu1)+colored("Welcome to meanwood's raid tool",menu2)+colored("                              ██",menu1))
         print (colored("██",menu1)+colored('{:^96}'.format(splashtext.rstrip()),menu2, attrs=['blink'])+colored("██",menu1))
         print (colored("██                                                                                                ██",menu1))
         print (colored("████████████████████████████████████████████████████████████████████████████████████████████████████",menu1))
@@ -2198,21 +2189,21 @@ def main():
             if no_tk_mode == 1:
                 joiner()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','joiner',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','joiner',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Joiner | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 2:
             if no_tk_mode == 1:
                 leaver()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','leaver',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','leaver',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Leaver | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 3:
             if no_tk_mode == 1:
                 groupleaver()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','groupleaver',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','groupleaver',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Group Leaver | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 4:
@@ -2221,70 +2212,70 @@ def main():
             if no_tk_mode == 1:
                 messagespam()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','messagespam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','messagespam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Message Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 6:
             if no_tk_mode == 1:
                 asciispam()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','asciispam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','asciispam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Ascii Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 7:
             if no_tk_mode == 1:
                 massmentioner()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','massmention',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','massmention',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Mass Mentioner Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 8:
             if no_tk_mode == 1:
                 vcspam()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','vcspam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','vcspam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Voice Chat Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 9:
             if no_tk_mode == 1:
                 dmspam()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','dmspammer',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','dmspammer',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["DM Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 10:
             if no_tk_mode == 1:
                 friender()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','friender',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','friender',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Friender Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 11:
             if no_tk_mode == 1:
                 groupdmspam()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','groupdmspam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','groupdmspam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Group DM Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 12:
             if no_tk_mode == 1:
                 imagespam()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','imagespam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','imagespam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Random Image Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 13:
             if no_tk_mode == 1:
                 gamechange()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','gamechange',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','gamechange',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Status Changer | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 14:
             if no_tk_mode == 1:
                 nickchange()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','nickname',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','nickname',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Nickname Changer | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 15:
@@ -2294,7 +2285,7 @@ def main():
                 input()
                 main()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','embed',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','embed',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Embed Spammer Attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 16:
@@ -2304,35 +2295,35 @@ def main():
                 input()
                 main()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','avatarchange',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','avatarchange',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Avatar Changing | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 17:
             if no_tk_mode == 1:
                 rolemassmention()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','rolemention',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','rolemention',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Role mass mention attack | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 18:
             if no_tk_mode == 1:
                 cleanup()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','cleanup',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','cleanup',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Tokens are cleaning up | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 19:
             if no_tk_mode == 1:
                 hypesquadchanger()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','hypesquad',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','hypesquad',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Hypesquad Changer | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 20:
             if no_tk_mode == 1:
                 reaction()
             elif no_tk_mode == 0:
-                p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','reaction',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+                p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','reaction',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
                 currentattacks["Reaction | Started at: {}".format(datetime.datetime.now().time())] = p.pid
                 main()
         elif int(choice) == 21:
@@ -2388,9 +2379,9 @@ def joiner():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Invite Joiner")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Invite Joiner")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Invite Joiner\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Invite Joiner\x07")
     print (colored("Discord invite joiner.",menu1))
     print (colored("0: Back",menu1))
     link = input('Discord Invite Link: ')
@@ -2398,7 +2389,7 @@ def joiner():
         main()
     if len(link) > 7:
         link = link[19:]
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','joiner',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),link],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','joiner',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),link],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Joiner Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2406,15 +2397,15 @@ def leaver():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Server Leaver")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Server Leaver")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Server Leaver\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Server Leaver\x07")
     print (colored("Discord server leaver.",menu1))
     print (colored("0: Back",menu1))
     ID = input ('ID of the server to leave: ')
     if ID == '0':
         main()
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','leaver',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),ID],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','leaver',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),ID],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Leaver Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2422,16 +2413,16 @@ def groupleaver():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Group DM Leaver")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Group DM Leaver")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Group DM Leaver\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Group DM Leaver\x07")
     print (colored("Discord group DM leaver.",menu1))
     print (colored("0: Back",menu1))
     ID = input ('ID of the group DM to leave: ')
     if str(ID) == '0':
         main()
     tokenlist = open("tokens/"+token_list).read().splitlines()
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','groupleaver',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),ID],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','groupleaver',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),ID],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Group Leaver Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2439,9 +2430,9 @@ def tokencheck():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Token Checker")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Token Checker")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Token Checker\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Token Checker\x07")
     vcounter = 0
     ucounter = 0
     icounter = 0
@@ -2503,9 +2494,9 @@ def messagespam():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Message Spammer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Message Spammer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Message Spammer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Message Spammer\x07")
     print (colored("Discord Server message spammer.",menu1))
     print (colored("0: Back",menu1))
     SERVER = input ("Server ID: ")
@@ -2515,7 +2506,7 @@ def messagespam():
     if chan.lower() == "all":
         print (colored("Spamming all channels","blue"))
     msgtxt = input ("Text to spam: ")
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','messagespam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),msgtxt,chan,SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','messagespam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),msgtxt,chan,SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Message Spammer Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2523,9 +2514,9 @@ def asciispam():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Ascii Spammer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Ascii Spammer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Ascii Spammer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Ascii Spammer\x07")
     print (colored("Discord server ascii spammer.",menu1))
     print (colored("0: Back",menu1))
     SERVER = input('Server ID: ')
@@ -2534,7 +2525,7 @@ def asciispam():
     chan = input ("Channel to spam in (type 'all' for all channels): ")
     if chan.lower() == "all":
         print (colored("Spamming all channels","blue"))
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','asciispam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),chan,SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','asciispam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),chan,SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Ascii Spammer Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2542,9 +2533,9 @@ def massmentioner():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Mass Mentioner")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Mass Mentioner")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Mass Mentioner\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Mass Mentioner\x07")
     print (colored("Discord server mass mentioner.",menu1))
     print (colored("0: Back",menu1))
     SERVER = input('Server ID: ')
@@ -2553,7 +2544,7 @@ def massmentioner():
     chan = input ("Channel to spam in (type 'all' for all channels): ")
     if chan.lower() == "all":
         print (colored("Spamming all channels","blue"))
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','massmention',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),SERVER,chan],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','massmention',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),SERVER,chan],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Mass Mentioner Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2561,9 +2552,9 @@ def vcspam():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Voice Chat Spammer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Voice Chat Spammer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Voice Chat Spammer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Voice Chat Spammer\x07")
     tcounter = 0
     print (colored("Discord VC joiner/spammer.",menu1))
     print (colored("0: Back",menu1))
@@ -2572,7 +2563,7 @@ def vcspam():
         main()
     chanid = input ('Voice channel ID: ')
     tokencount = input ('Number of tokens to use: ')
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','vcspam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),ytlink,chanid,tokencount],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','vcspam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),ytlink,chanid,tokencount],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Voice Chat Spammer Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2580,16 +2571,16 @@ def dmspam():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | DM Spammer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | DM Spammer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | DM Spammer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | DM Spammer\x07")
     print (colored("Discord user DM spammer.",menu1))
     print (colored("0: Back",menu1))
     user = input ("User's ID: ")
     if str(user) == '0':
         main()
     msgtxt = input ("Text to spam (Ascii Spam = ascii): ")
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','dmspammer',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),user,msgtxt],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','dmspammer',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),user,msgtxt],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["DM Spammer Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2597,15 +2588,15 @@ def friender():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Friend Request Spammer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Friend Request Spammer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Friend Request Spammer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Friend Request Spammer\x07")
     print (colored("Discord user mass friender.",menu1))
     print (colored("0: Back",menu1))
     userid = input("User's ID: ")
     if str(userid) == '0':
         main()
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','friender',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),userid],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','friender',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),userid],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Friender Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2613,16 +2604,16 @@ def groupdmspam():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Group DM Spammer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Group DM Spammer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Group DM Spammer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Group DM Spammer\x07")
     print (colored("Discord Group DM message spammer.",menu1))
     print (colored("0: Back",menu1))
     group = input ("Group ID: ")
     if str(group) == '0':
         main()
     msgtxt = input ("Text to spam (Ascii Spam = ascii): ")
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','groupdmspam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),msgtxt,group],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','groupdmspam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),msgtxt,group],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Group DM Spammer Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2630,9 +2621,9 @@ def imagespam():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Image Spammer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Image Spammer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Image Spammer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Image Spammer\x07")
     print (colored("Discord server image spammer.",menu1))
     print (colored("0: Back",menu1))
     SERVER = input('Server ID: ')
@@ -2641,7 +2632,7 @@ def imagespam():
     chan = input ("Channel to spam in (type 'all' for all channels): ")
     if chan.lower() == "all":
         print (colored("Spamming all channels","blue"))
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','imagespam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),chan,SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','imagespam',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),chan,SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Random Image Spammer Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2649,16 +2640,16 @@ def gamechange():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Playing Status Changer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Playing Status Changer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Playing Status Changer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Playing Status Changer\x07")
     print (colored("Discord game playing status changer.",menu1))
     print (colored("0: Back",menu1))
     print ('Name of game to play: ')
     game = input ('Playing ')
     if game == '0':
         main()
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','gamechange',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),game],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','gamechange',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),game],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Game Status Changing Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2666,15 +2657,15 @@ def nickchange():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Ascii Nickname Changer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Ascii Nickname Changer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Ascii Nickname Changer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Ascii Nickname Changer\x07")
     print (colored("Discord random ascii nickname.",menu1))
     print (colored("0: Back",menu1))
     SERVER = input ("Server ID: ")
     if str(SERVER) == '0':
         main()
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','nickname',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','nickname',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Nickname Changer Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2682,9 +2673,9 @@ def rolemassmention():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Role Mass Mentioner")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Role Mass Mentioner")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Role Mass Mentioner\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Role Mass Mentioner\x07")
     print (colored("Discord role mass mentioner.",menu1))
     print (colored("This will spam mention all roles that are mentionable.",menu1))
     print (colored("0: Back",menu1))
@@ -2694,7 +2685,7 @@ def rolemassmention():
     chan = input ("Channel to spam in (type 'all' for all channels): ")
     if chan.lower() == "all":
         print (colored("Spamming all channels","blue"))
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','rolemention',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),SERVER,chan],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','rolemention',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),SERVER,chan],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Role Mass Mentioner Attack Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2702,16 +2693,16 @@ def cleanup():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Message Cleaner")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Message Cleaner")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Message Cleaner\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Message Cleaner\x07")
     print (colored("Clean up messages sent by a token",menu1))
     print (colored("This will delete all the messages sent by the token.",menu1))
     print (colored("0: Back",menu1))
     SERVER = input('Server ID: ')
     if str(SERVER) == '0':
         main()
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','cleanup',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','cleanup',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),SERVER],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Tokens are cleaning up Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2719,9 +2710,9 @@ def hypesquadchanger():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | HypeSquad Changer")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | HypeSquad Changer")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | HypeSquad Changer\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | HypeSquad Changer\x07")
     print (colored("0. Back",menu2))
     print (colored("1. Bravery",menu2))
     print (colored("2. Brilliance",menu2))
@@ -2735,7 +2726,7 @@ def hypesquadchanger():
         choice = 'Brilliance'
     elif int(choice) == 3:
         choice = 'Ballance'
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','hypesquad',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),choice],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','hypesquad',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),choice],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Hypesquad Changer Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2743,9 +2734,9 @@ def reaction():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Emoji Reactor")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Emoji Reactor")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Emoji Reactor\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Emoji Reactor\x07")
     print (colored("Emoji Reactor.",menu1))
     if not no_tk_mode == 1:
         print('why are you using cli like seriously')
@@ -2755,7 +2746,7 @@ def reaction():
         main()
     msgid = input ("Message ID: ")
     emoji = input ("Emoji: ")
-    p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','reaction',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),msgid,chan,"Add",emoji,chan],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','reaction',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),msgid,chan,"Add",emoji,chan],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Reaction Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -2763,19 +2754,19 @@ def serversmasher():
     global currentattacks
     clear()
     if command_line_mode == 1:
-        print ("The config file for the ServerSmasher is in RTBFiles/smconfig.py, please add token before starting.")
+        print ("The config file for the ServerSmasher is in MRTFiles/smconfig.py, please add token before starting.")
     if sys.platform.startswith('win32'):
         if server_smasher_in_main_window == 1:
-            p = subprocess.Popen([sys.executable,'RTBFiles/ServerSmasher/serversmasher.py',"?",menu1,menu2,str(no_tk_mode)])
+            p = subprocess.Popen([sys.executable,'MRTFiles/ServerSmasher/serversmasher.py',"?",menu1,menu2,str(no_tk_mode)])
             p.wait()
         else:
-            subprocess.Popen([sys.executable,'RTBFiles/ServerSmasher/serversmasher.py',"?",menu1,menu2,str(no_tk_mode)],creationflags=CREATE_NEW_CONSOLE)
+            subprocess.Popen([sys.executable,'MRTFiles/ServerSmasher/serversmasher.py',"?",menu1,menu2,str(no_tk_mode)],creationflags=CREATE_NEW_CONSOLE)
     else:
         if server_smasher_in_main_window == 1:
-            p = subprocess.Popen([sys.executable,'RTBFiles/ServerSmasher/serversmasher.py',"?",menu1,menu2,str(no_tk_mode)])
+            p = subprocess.Popen([sys.executable,'MRTFiles/ServerSmasher/serversmasher.py',"?",menu1,menu2,str(no_tk_mode)])
             p.wait()
         else:
-            subprocess.call(['gnome-terminal', '-x', sys.executable,'RTBFiles/ServerSmasher/serversmasher.py',"?",menu1,menu2,str(no_tk_mode)])
+            subprocess.call(['gnome-terminal', '-x', sys.executable,'MRTFiles/ServerSmasher/serversmasher.py',"?",menu1,menu2,str(no_tk_mode)])
     if server_smasher_in_main_window == 1:
         pass
     elif no_tk_mode == 1:
@@ -2790,9 +2781,9 @@ def viewcurrentat():
     acount = -1
     names = []
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Current Attacks")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Current Attacks")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Current Attacks\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Current Attacks\x07")
     print (colored("Current Attacks:",menu1))
     print (colored("---------------------",menu1))
     for attack in list(currentattacks):
@@ -2837,9 +2828,9 @@ def customplugins():
     pluginfile = []
     pluginfolder = []
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Custom Plugins (Legacy)")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Custom Plugins (Legacy)")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Custom Plugins (Legacy)\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Custom Plugins (Legacy)\x07")
     pluginno = -1
     print (colored("Installed Plugins:",menu1))
     print (colored("----------------------",menu1))
@@ -2874,15 +2865,15 @@ def customplugins():
         customplugins()
     if plug == 'd':
         clear()
-        down = requests.get("https://github.com/DeadBread76/Raid-Toolbox-Plugins/archive/master.zip")
+        down = requests.get("https://github.com/meanwood/mnwd_raid_tool-Plugins/archive/master.zip")
         with open("legacyplugins/package.zip", "wb") as handle:
             handle.write(down.content)
         shutil.unpack_archive("legacyplugins/package.zip","legacyplugins/")
         os.remove("legacyplugins/package.zip")
-        for root, dirs, files in os.walk("legacyplugins/Raid-Toolbox-Plugins-master/", topdown=False):
+        for root, dirs, files in os.walk("legacyplugins/mnwd_raid_tool-Plugins-master/", topdown=False):
             for folder in dirs:
-                copy_tree("legacyplugins/Raid-Toolbox-Plugins-master/{}/".format(folder), "legacyplugins/{}/".format(folder+"/"))
-        shutil.rmtree("legacyplugins/Raid-Toolbox-Plugins-master/")
+                copy_tree("legacyplugins/mnwd_raid_tool-Plugins-master/{}/".format(folder), "legacyplugins/{}/".format(folder+"/"))
+        shutil.rmtree("legacyplugins/mnwd_raid_tool-Plugins-master/")
         print("Downloaded plugins from Repo.")
         input("Press enter to reload plugins")
         customplugins()
@@ -2896,11 +2887,11 @@ def diagrun():
     global currentattacks
     print("Checking if CloudFlare Banned...")
     print("Checking Stable Endpoint...")
-    cloudcheck = requests.get("https://discordapp.com/api/v6/invite/DEADBREAD")
+    cloudcheck = requests.get("https://discordapp.com/api/v6/invite/meanwood")
     print("Checking PTB Endpoint...")
-    ptbcloudcheck = requests.get("https://ptb.discordapp.com/api/v6/invite/DEADBREAD")
+    ptbcloudcheck = requests.get("https://ptb.discordapp.com/api/v6/invite/meanwood")
     print("Checking Canary Endpoint...")
-    cancloudcheck = requests.get("https://canary.discordapp.com/api/v6/invite/DEADBREAD")
+    cancloudcheck = requests.get("https://canary.discordapp.com/api/v6/invite/meanwood")
     try:
         json.loads(cloudcheck.content)
         stbanned = False
@@ -2928,9 +2919,9 @@ def diagrun():
     now = datetime.datetime.now()
     filename = str(now.strftime("%H%M%S%d%m%Y"))
     with open ("Diagnostics" +filename+".txt", 'w+') as handle:
-        handle.write("Raid Toolbox Diagnostics "+str(now.strftime("%d/%m/%Y %H:%M:%S"))+"\n")
+        handle.write("raid tool Diagnostics "+str(now.strftime("%d/%m/%Y %H:%M:%S"))+"\n")
         handle.write("=====================================================\n")
-        handle.write("RTB VERSION: " + rtbversion + "\n")
+        handle.write("MRT VERSION: " + rtbversion + "\n")
         handle.write("SM VERSION: " + smversion + "\n")
         try:
             handle.write("Startup Time: {}".format(t1-t0)+"\n")
@@ -2943,7 +2934,7 @@ def diagrun():
         handle.write("PTB Endpoint: {}\n".format(ptbbanned))
         handle.write("Canary Endpoint: {}\n".format(banned))
         if banned:
-            handle.write("The canary endpoint is used for RTB, This means some functions will not work.\n")
+            handle.write("The canary endpoint is used for MRT, This means some functions will not work.\n")
         handle.write("---------------\n")
         handle.write("Python Info:\n\n")
         handle.write("Python Version: " + sys.version+"\n")
@@ -2955,7 +2946,7 @@ def diagrun():
         else:
             handle.write("Processor: " + (str(cpu))+"\n")
         handle.write("---------------\n")
-        handle.write("RTB Dump:\n\n")
+        handle.write("MRT Dump:\n\n")
         plugindir = os.listdir('plugins/')
         handle.write(str(sys.modules.keys())+"\n")
         handle.write(str(dir())+"\n")
@@ -2963,26 +2954,26 @@ def diagrun():
         handle.write(str(locals())+"\n")
         handle.write("---------------\n")
 
-@animation.wait(colored('Downloading update for Raid ToolBox, Please Wait ',menu1))
+@animation.wait(colored('Downloading update for raid tool, Please Wait ',menu1))
 def run_update():
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Updating...")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Updating...")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Updating...\x07")
-    update = requests.get('https://github.com/DeadBread76/Raid-Toolbox/archive/master.zip')
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Updating...\x07")
+    update = requests.get('https://github.com/meanwood/mnwd_raid_tool/archive/master.zip')
     clear()
     print(colored("Update has been downloaded, Installing...",menu1))
     with open("update.zip", "wb") as handle:
         handle.write(update.content)
     try:
-        shutil.copy("RTBFiles/smconfig.py", "smconfig_old.py")
+        shutil.copy("MRTFiles/smconfig.py", "smconfig_old.py")
     except Exception:
         pass
     try:
         shutil.unpack_archive("update.zip")
-        copy_tree("Raid-Toolbox-master/", ".")
+        copy_tree("mnwd_raid_tool-master/", ".")
         os.remove("update.zip")
-        shutil.rmtree("Raid-Toolbox-master/")
+        shutil.rmtree("mnwd_raid_tool-master/")
         with open('config.json', 'r+') as handle:
             edit = json.load(handle)
             edit['skin'] = skin
@@ -3011,9 +3002,9 @@ def info():
     else:
         os.system("printf '\033[8;30;100t'")
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Info")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Info")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Info\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Info\x07")
     print (colored("  _____       _     _   _______          _ ____            ",menu1))
     print (colored(" |  __ \     (_)   | | |__   __|        | |  _ \           ",menu1))
     print (colored(" | |__) |__ _ _  __| |    | | ___   ___ | | |_) | _____  __",menu1))
@@ -3021,21 +3012,21 @@ def info():
     print (colored(" | | \ \ (_| | | (_| |    | | (_) | (_) | | |_) | (_) >  < ",menu1))
     print (colored(" |_|  \_\__,_|_|\__,_|    |_|\___/ \___/|_|____/ \___/_/\_\ ",menu1))
     print (colored("------------------------------------------------------------",menu1))
-    print (colored("Copyright (c) 2019, DeadBread",menu1))
+    print (colored("Copyright (c) 2019, meanwood",menu1))
     print (colored("                                                            ",menu1))
-    print (colored("https://github.com/DeadBread76/Raid-Toolbox",menu2))
+    print (colored("https://github.com/meanwood/mnwd_raid_tool",menu2))
     print (colored("Discord: https://discord.gg/7RtuZEe\nTelegram: https://t.me/DeadBakery",menu2))
     print (colored("                                                            ",menu1))
     if singlefile == True:
         print (colored("SINGLE FILE MODE ACTIVE",menu2))
     if no_tk_mode == 1:
         print (colored("Termux Mode.",menu2))
-    print (colored("Raid ToolBox version: "+rtbversion,menu2))
+    print (colored("raid tool version: "+rtbversion,menu2))
     if verbose == 1:
         print(colored("\nStartup Time: {}".format(t1-t0),menu2))
     print (colored("                                                            ",menu1))
     print (colored("------------------------------------------------------------",menu1))
-    print (colored("Type 'update' to update Raid ToolBox to the latest version.",menu2))
+    print (colored("Type 'update' to update raid tool to the latest version.",menu2))
     print (colored("Type 'reinstall' to reinstall or update requirements",menu2))
     print (colored("Type 'diag' for diagnostics log.",menu2))
     print (colored("Type 'yt' for my YouTube channel.",menu2))
@@ -3043,7 +3034,7 @@ def info():
     print (colored("------------------------------------------------------------",menu1))
     inf = input(colored(">",menu2))
     if inf.lower() == "ree":
-        p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','ree',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)])
+        p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','ree',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme)])
         currentattacks["GOD Started at: {}".format(datetime.datetime.now().time())] = p.pid
     elif inf.lower() == 'yt':
         clear()
@@ -3075,16 +3066,16 @@ def info():
             input()
             info()
         if sys.platform.startswith('win32'):
-            ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Diagnostics")
+            ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Diagnostics")
         else:
-            sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Diagnostics\x07")
+            sys.stdout.write("\x1b]2;meanwood's raid tool | Diagnostics\x07")
         diagrun()
         print ("Diagnostics Written to file.")
         input()
     elif inf.lower() == 'update':
         clear()
         if "b" in rtbversion:
-            print("This is a test version of RTB, Please do not update.")
+            print("This is a test version of MRT, Please do not update.")
             input()
         else:
             u = input("Are you sure you want to update?(Y/N)\n")
@@ -3143,12 +3134,12 @@ def info():
                     sys.stdout.write('>')
                     sys.stdout.flush()
                     time.sleep(1)
-                    for char in 'os.remove("RTB.py")':
+                    for char in 'os.remove("MRT.py")':
                         time.sleep(0.10)
                         sys.stdout.write(char)
                         sys.stdout.flush()
-                    os.rename("RTB.py", "RTBFiles/RTB.py")
-                    print('\nRTB.py deleted successfully')
+                    os.rename("MRT.py", "MRTFiles/MRT.py")
+                    print('\nMRT.py deleted successfully')
                     time.sleep(1)
                     while True:
                         print(asciigen(4000))
@@ -3162,7 +3153,7 @@ def quickcheck():
     clear()
     tokenlist = open("tokens/"+token_list).read().splitlines()
     for token in tokenlist:
-        p = subprocess.Popen([sys.executable,'RTBFiles/attack_controller.py','quickcheck',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),token])
+        p = subprocess.Popen([sys.executable,'MRTFiles/attack_controller.py','quickcheck',sys.executable,str(no_tk_mode),str(thread_count),str(attacks_theme),token])
         time.sleep(0.07)
     p.wait()
     input("Checking complete.")
@@ -3172,9 +3163,9 @@ def tokenmanager():
     global currentattacks
     clear()
     if sys.platform.startswith('win32'):
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Token Manager")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Token Manager")
     else:
-        sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Token Manager\x07")
+        sys.stdout.write("\x1b]2;meanwood's raid tool | Token Manager\x07")
     tokenlist = open("tokens/"+token_list).read().splitlines()
     print(colored("====================",menu1))
     print(colored("     Token Menu     ",menu1))
@@ -3500,10 +3491,10 @@ def wew():
     global currentattacks
     if sys.platform.startswith('win32'):
         clear()
-        ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | ¯\_(ツ)_/¯")
+        ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | ¯\_(ツ)_/¯")
     else:
         main()
-    p = subprocess.Popen([sys.executable,'RTBFiles/player.py',sys.executable],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
+    p = subprocess.Popen([sys.executable,'MRTFiles/player.py',sys.executable],stdout=open("errors.log", "a+"), stderr=subprocess.STDOUT)
     currentattacks["Music! | Started at: {}".format(datetime.datetime.now().time())] = p.pid
     main()
 
@@ -3589,7 +3580,7 @@ if __name__ == "__main__":
                 layout.append([sg.Text("No Files in the tokens folder.", size=(45,1)), sg.Button("Create New...", size=(10,1))])
             else:
                 layout.append([sg.Button("Create New...", size=(10,1)), sg.Button("Close", size=(10,1))])
-            window = sg.Window("DeadBread's Raid ToolBox v{} | Choose Token list".format(rtbversion)).Layout(layout)
+            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(rtbversion)).Layout(layout)
             while True:
                 event, values = window.Read()
                 if event is None:
@@ -3630,7 +3621,7 @@ if __name__ == "__main__":
                                 layout.append([sg.Text("No Files in the tokens folder.", size=(45,1)), sg.Button("Create New...", size=(8,1))])
                             else:
                                 layout.append([sg.Button("Create New...", size=(10,1)), sg.Button("Close", size=(10,1))])
-                            window = sg.Window("DeadBread's Raid ToolBox v{} | Choose Token list".format(rtbversion)).Layout(layout)
+                            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(rtbversion)).Layout(layout)
                             break
                         else:
                             try:
@@ -3653,7 +3644,7 @@ if __name__ == "__main__":
                                 layout.append([sg.Text("No Files in the tokens folder.", size=(45,1)), sg.Button("Create New...", size=(8,1))])
                             else:
                                 layout.append([sg.Button("Create New...", size=(10,1)), sg.Button("Close", size=(10,1))])
-                            window = sg.Window("DeadBread's Raid ToolBox v{} | Choose Token list".format(rtbversion)).Layout(layout)
+                            window = sg.Window("meanwood's raid tool v{} | Choose Token list".format(rtbversion)).Layout(layout)
                             break
                 elif event == "Close":
                     window.Close()
@@ -3689,10 +3680,10 @@ if __name__ == "__main__":
                     mp3_data = base64.b64decode(menu_mp3)
                     with open("themes/{}".format(menu_mp3_filename),"wb") as handle:
                         handle.write(mp3_data)
-                    subprocess.Popen([sys.executable, 'RTBFiles/play.py', "Theme", "themes/"+menu_mp3_filename, skin, str(os.getpid()), str(menu_mp3_loop)])
+                    subprocess.Popen([sys.executable, 'MRTFiles/play.py', "Theme", "themes/"+menu_mp3_filename, skin, str(os.getpid()), str(menu_mp3_loop)])
                     del menu_mp3  # Remove MP3 from memory to save resources
                 else:
-                    subprocess.Popen([sys.executable, 'RTBFiles/play.py', "Theme", "themes/"+menu_mp3_filename, skin, str(os.getpid()), str(menu_mp3_loop)])
+                    subprocess.Popen([sys.executable, 'MRTFiles/play.py', "Theme", "themes/"+menu_mp3_filename, skin, str(os.getpid()), str(menu_mp3_loop)])
                     del menu_mp3  # Remove MP3 from memory to save resources
     if sys.platform.startswith('win32'):
         if command_line_mode == 1:
@@ -3709,7 +3700,7 @@ if __name__ == "__main__":
                 trace = traceback.format_exception(exc_type, exc_value, exc_traceback)
                 for line in trace:
                     exception += line
-                yesno = input(f"Raid ToolBox Crashed: {repr(e)}\nDetails:\n{exception}\n\nReport to DeadBread? (No revealing data is sent.)[Y/N]: ")
+                yesno = input(f"raid tool Crashed: {repr(e)}\nDetails:\n{exception}\n\nReport to meanwood? (No revealing data is sent.)[Y/N]: ")
                 if yesno.lower() == "y":
                     payload = {"content": f"```{exception}```"}
                     try:
@@ -3726,7 +3717,7 @@ if __name__ == "__main__":
                 trace = traceback.format_exception(exc_type, exc_value, exc_traceback)
                 for line in trace:
                     exception += line
-                yesno = sg.PopupYesNo(f"Raid ToolBox Crashed: {repr(e)}\nDetails:\n{exception}\n\nReport to DeadBread? (No revealing data is sent.)", title="Raid ToolBox Crashed :'(")
+                yesno = sg.PopupYesNo(f"raid tool Crashed: {repr(e)}\nDetails:\n{exception}\n\nReport to meanwood? (No revealing data is sent.)", title="raid tool Crashed :'(")
                 if yesno == "Yes":
                     payload = {"content": f"```{exception}```"}
                     try:
@@ -3734,4 +3725,4 @@ if __name__ == "__main__":
                     except Exception:
                         pass
                     else:
-                        sg.PopupNonBlocking('Reported to DeadBread. Thanks!', title="Done.",keep_on_top=True)
+                        sg.PopupNonBlocking('Reported to meanwood. Thanks!', title="Done.",keep_on_top=True)

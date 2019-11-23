@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# Raid ToolBox Server Smasher
-# Author: DeadBread76 - https://github.com/DeadBread76/
+# raid tool Server Smasher
+# Author: meanwood - https://github.com/meanwood/
 # Base code (The OG Server Smasher): Synchronocy - https://github.com/synchronocy
 # ThreadPool: Synchronocy - https://github.com/synchronocy
 #
-# Copyright (c) 2019, DeadBread
+# Copyright (c) 2019, meanwood
 #
 #                     GNU GENERAL PUBLIC LICENSE
 #                        Version 2, June 1991
@@ -428,11 +428,11 @@ else:
     Tk().withdraw()
 
 if sys.platform.startswith('win32'):
-    ctypes.windll.kernel32.SetConsoleTitleW("DeadBread's Raid ToolBox | Server Smasher v{}".format(smversion))
+    ctypes.windll.kernel32.SetConsoleTitleW("meanwood's raid tool | Server Smasher v{}".format(smversion))
 elif sys.platform.startswith('linux'):
-    sys.stdout.write("\x1b]2;DeadBread's Raid ToolBox | Server Smasher v{}\x07".format(smversion))
+    sys.stdout.write("\x1b]2;meanwood's raid tool | Server Smasher v{}\x07".format(smversion))
 ydl_opts = {
-    'outtmpl': 'RTBFiles/ServerSmasher/file.webm',
+    'outtmpl': 'MRTFiles/ServerSmasher/file.webm',
     'format': 'bestaudio/best',
     'postprocessors': [{
         'key': 'FFmpegExtractAudio',
@@ -1240,15 +1240,15 @@ async def main(SERVER):
                             await main(SERVER)
                     if toga.lower() == 's':
                         presetname = await loop.run_in_executor(ThreadPoolExecutor(), inputselection,'Name Of Preset: ')
-                        if not os.path.exists("RTBFiles/ServerSmasher/presets/"):
-                            os.mkdir("RTBFiles/ServerSmasher/presets/")
-                        with open ("RTBFiles/ServerSmasher/presets/{}.smpreset".format(presetname),"w+", errors='ignore') as handle:
+                        if not os.path.exists("MRTFiles/ServerSmasher/presets/"):
+                            os.mkdir("MRTFiles/ServerSmasher/presets/")
+                        with open ("MRTFiles/ServerSmasher/presets/{}.smpreset".format(presetname),"w+", errors='ignore') as handle:
                             handle.write(str(toggleopts))
                         await changesettings(toggleopts,SERVER)
                     if toga.lower() == 'l':
                         clear()
                         presets = []
-                        for file in os.listdir("RTBFiles/ServerSmasher/presets/"):
+                        for file in os.listdir("MRTFiles/ServerSmasher/presets/"):
                             if file.endswith(".smpreset"):
                                 presets.append(file)
                         precount = -1
@@ -1256,7 +1256,7 @@ async def main(SERVER):
                             precount += 1
                             print(colored("{}. {}".format(precount,pre),menucolour))
                         prechoice = await loop.run_in_executor(ThreadPoolExecutor(), inputselection,'Preset To load: ')
-                        with open("RTBFiles/ServerSmasher/presets/{}".format(presets[int(prechoice)]), "r", errors="ignore") as handle:
+                        with open("MRTFiles/ServerSmasher/presets/{}".format(presets[int(prechoice)]), "r", errors="ignore") as handle:
                             content = handle.read().splitlines()
                             toggleopts = ast.literal_eval(content[0])
                             print("Loaded Config File")
@@ -1846,12 +1846,12 @@ async def music_player_main(voice_channel,server):
                 clear()
                 url = await loop.run_in_executor(ThreadPoolExecutor(), inputselection,'YouTube Link to play: ')
                 try:
-                    if os.path.isfile('RTBFiles/ServerSmasher/file.mp3'):
-                        os.remove('RTBFiles/ServerSmasher/file.mp3')
+                    if os.path.isfile('MRTFiles/ServerSmasher/file.mp3'):
+                        os.remove('MRTFiles/ServerSmasher/file.mp3')
                         print ("Removed old .mp3.")
                     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                         ydl.download([url])
-                    vc.play(discord.FFmpegPCMAudio('RTBFiles/ServerSmasher/file.mp3'))
+                    vc.play(discord.FFmpegPCMAudio('MRTFiles/ServerSmasher/file.mp3'))
                     vc.source = discord.PCMVolumeTransformer(vc.source)
                     vc.source.volume = 1.0
                 except Exception as e:

@@ -5,6 +5,55 @@
 *.zip
 *.smpreset
 *.mp3
-RTBFiles/licence
+MRTFiles/licence
 *.txt
-RTBFiles/rtb_icon.png
+MRTFiles/rtb_icon.png
+
+
+### PyCharm+all Patch ###
+# Ignores the whole .idea folder and all .iml files
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+.idea/
+*.iml
+modules.xml
+*.ipr
+
+### venv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+pip-selfcheck.json
+venv
+/src/token_db/
+
+### Linux ###
+*~
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+# File-based project format
+*.iws
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# Runtime-generated data not to be published.
+__pycache__
+
+# Required files/folders containing sensible information.
+.env

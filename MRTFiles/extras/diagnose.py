@@ -2,7 +2,7 @@ import os
 import sys
 
 try:
-    from RTB import*
+    from MRT import*
 except Exception as rtbloaderror:
     rtberror = rtbloaderror
     loaderror = True
@@ -16,15 +16,15 @@ elif sys.platform.startswith('linux'):
 while True:
     clear()
     print("===========================")
-    print("RAID TOOLBOX DIAGNOSIS TOOL")
+    print("raid tool DIAGNOSIS TOOL")
     print("===========================")
     try:
-        print("RTB Version: {}\nSM Version: {}".format(rtbversion,smversion))
+        print("MRT Version: {}\nSM Version: {}".format(rtbversion,smversion))
     except Exception:
-        print("RTB was unable to start")
+        print("MRT was unable to start")
     print("===========================")
     if loaderror:
-        print("There was an error with RTB:")
+        print("There was an error with MRT:")
         print(rtberror)
         print("===========================")
     print("0. Console")

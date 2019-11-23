@@ -9,7 +9,7 @@ button_colour = "black"
 banner_size = (600, 100)
 banner_padding = ((75, 15), 0)
 
-# Preset Themes can be found here: https://gist.githubusercontent.com/DeadBread76/7c70629c31fd16e13f09910b260a9070/raw/6cc8d27257a3ff2104a40b5ba6e2666a9f339733/PySimpleGUI%2520Themes
+# Preset Themes can be found here: https://gist.githubusercontent.com/meanwood/7c70629c31fd16e13f09910b260a9070/raw/6cc8d27257a3ff2104a40b5ba6e2666a9f339733/PySimpleGUI%2520Themes
 use_preset_theme = False
 preset_window_theme = "Black"
 

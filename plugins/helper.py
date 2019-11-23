@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # plugins.helper
-# Author: DeadBread76 - https://github.com/DeadBread76/
+# Author: meanwood - https://github.com/meanwood/
 # August 12th, 2019
 #
-# Copyright (c) 2019, DeadBread
+# Copyright (c) 2019, meanwood
 #
 #                     GNU GENERAL PUBLIC LICENSE
 #                        Version 2, June 1991
@@ -347,7 +347,7 @@
 
 """
 Documentation
-(Full Documentation Here: https://github.com/DeadBread76/Raid-Toolbox/wiki/How-to-create-a-Plugin-for-RTB)
+(Full Documentation Here: https://github.com/meanwood/mnwd_raid_tool/wiki/How-to-create-a-Plugin-for-MRT)
 Load plugin helper:
 
 import plugins.helper
@@ -364,9 +364,9 @@ import sys
 import json
 import random
 sys.path.append('..')
-import RTBFiles.attack_dict
+import MRTFiles.attack_dict
 
-attack_dict = RTBFiles.attack_dict.currentattacks  # The Main Dictionary For Attacks.
+attack_dict = MRTFiles.attack_dict.currentattacks  # The Main Dictionary For Attacks.
 with open('./config.json', 'r') as handle:
     config = json.load(handle)
     skin = config['skin']

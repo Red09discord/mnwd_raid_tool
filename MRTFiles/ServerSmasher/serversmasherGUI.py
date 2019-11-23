@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# Raid ToolBox ServerSmasher GUI
-# Author: DeadBread76 - https://github.com/DeadBread76/
+# raid tool ServerSmasher GUI
+# Author: meanwood - https://github.com/meanwood/
 # Original Server Smasher: Synchronocy - https://github.com/synchronocy
 # Date: 13th August 2019
 #
-# Copyright (c) 2019, DeadBread
+# Copyright (c) 2019, meanwood
 #
 #                     GNU GENERAL PUBLIC LICENSE
 #                        Version 2, June 1991
@@ -363,7 +363,7 @@ with open('./config.json', 'r') as handle:
     token_list = config['token_list']
     thread_count = config['thread_count']
 
-with open('RTBFiles/ServerSmasher/ssconfig.json', 'r') as handle:
+with open('MRTFiles/ServerSmasher/ssconfig.json', 'r') as handle:
     config = json.load(handle)
     ss_token_list = config['ss_token_list']
     startup_status = config['startup_status']
@@ -382,7 +382,7 @@ theme = ast.literal_eval(sys.argv[1])
 ws = websocket.WebSocket()
 guild_cache = None
 try:
-    rtb_icon = base64.b64encode(open("./RTBFiles/rtb_icon.png", "rb").read())
+    rtb_icon = base64.b64encode(open("./MRTFiles/rtb_icon.png", "rb").read())
 except:
     rtb_icon = b''
 if theme['use_custom_theme']:
@@ -402,7 +402,7 @@ if not os.path.exists("./tokens/ServerSmasherGUI"):
     with open("./tokens/ServerSmasherGUI/sstokens.txt", "a+") as handle:
         pass
     ss_token_list = "sstokens.txt"
-    with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+    with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
         edit = json.load(handle)
         edit['ss_token_list'] = ss_token_list
         handle.seek(0)
@@ -410,7 +410,7 @@ if not os.path.exists("./tokens/ServerSmasherGUI"):
         handle.truncate()
 elif ss_token_list == "":
     ss_token_list = "sstokens.txt"
-    with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+    with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
         edit = json.load(handle)
         edit['ss_token_list'] = ss_token_list
         handle.seek(0)
@@ -547,7 +547,7 @@ def login_serversmasher():
              [sg.Combo(['Bot','User'], readonly=True, key="Type", size=(5,0.7), default_value=default_type), sg.Input(default_token, do_not_clear=True, focus=True, key="TOKEN", size=(45,0.8)), sg.Button("Login", size=(7,0.8))],
              [sg.Button("Use user token list", key="ToggleuserList", size=(28.5, 0.6)), sg.Button("Use bot token list", key="TogglebotList", size=(28.5, 0.6))],
              ]
-    window = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
+    window = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read(timeout=100)
         if event is None:
@@ -569,7 +569,7 @@ def login_serversmasher():
                 with ThreadPoolExecutor(max_workers=thread_count) as ex:
                     for bot in bottokenlist:
                         ex.submit(check_user, "Bot", bot)
-                with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+                with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                     edit = json.load(handle)
                     edit['bots_cached'] = True
                     edit['bot_token_cache'] = bot_token_cache
@@ -584,7 +584,7 @@ def login_serversmasher():
                 [sg.Text("Select a Bot to use.", size=(15,0.7)), sg.Text("", size=(11,0.8)), sg.Button("Go Back", key="Back", size=(11,0.8))],
                 [sg.Combo(botlist, size=(15,0.7), key="BotToken"), sg.Button("Select Bot", size=(11,0.8), key="SelectBot"), sg.Button("Refresh Tokens", key="Refresh Bots", size=(11,0.8))]
             ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
             window = window1
 
         elif event == "ToggleuserList":
@@ -595,7 +595,7 @@ def login_serversmasher():
                 with ThreadPoolExecutor(max_workers=thread_count) as ex:
                     for user in usertokenlist:
                         ex.submit(check_user, "User", user)
-                with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+                with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                     edit = json.load(handle)
                     edit['users_cached'] = True
                     edit['user_token_cache'] = user_token_cache
@@ -610,7 +610,7 @@ def login_serversmasher():
                      [sg.Text("Select a User to use.", size=(15,0.7)), sg.Text("", size=(11,0.8)), sg.Button("Go Back", key="Back", size=(11,0.8))],
                      [sg.Combo(userlist, size=(15,0.7), key="UserToken"), sg.Button("Select User", size=(11,0.8), key="SelectUser"), sg.Button("Refresh Tokens", key="Refresh Users", size=(11,0.8))]
                      ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{} | User Tokens".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{} | User Tokens".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
             window = window1
 
         elif event == 'Refresh Bots':
@@ -620,7 +620,7 @@ def login_serversmasher():
             with ThreadPoolExecutor(max_workers=thread_count) as ex:
                 for bot in bottokenlist:
                     ex.submit(check_user, "Bot", bot)
-            with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+            with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                 edit = json.load(handle)
                 edit['bots_cached'] = True
                 edit['bot_token_cache'] = bot_token_cache
@@ -635,7 +635,7 @@ def login_serversmasher():
                      [sg.Text("Select a Bot to use.", size=(15,0.7)), sg.Text("", size=(11,0.8)), sg.Button("Go Back", key="Back", size=(11,0.8))],
                      [sg.Combo(botlist, size=(15,0.7), key="BotToken"), sg.Button("Select Bot", size=(11,0.8), key="SelectBot"), sg.Button("Refresh Tokens", key="Refresh Bots", size=(11,0.8))]
                      ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
             window = window1
 
         elif event == 'Refresh Users':
@@ -645,7 +645,7 @@ def login_serversmasher():
             with ThreadPoolExecutor(max_workers=thread_count) as ex:
                 for user in usertokenlist:
                     ex.submit(check_user, "User", user)
-            with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+            with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                 edit = json.load(handle)
                 edit['users_cached'] = True
                 edit['user_token_cache'] = user_token_cache
@@ -660,7 +660,7 @@ def login_serversmasher():
                      [sg.Text("Select a User to use.", size=(15,0.7)), sg.Text("", size=(11,0.8)), sg.Button("Go Back", key="Back", size=(11,0.8))],
                      [sg.Combo(userlist, size=(15,0.7), key="UserToken"), sg.Button("Select User", size=(11,0.8), key="SelectUser"), sg.Button("Refresh Tokens", key="Refresh Users", size=(11,0.8))]
                      ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{} | User Tokens".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{} | User Tokens".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
             window = window1
 
         elif event == "Back":
@@ -681,7 +681,7 @@ def login_serversmasher():
                      [sg.Combo(['Bot','User'], readonly=True, key="Type", size=(5,0.7), default_value=default_type), sg.Input(default_token, do_not_clear=True, focus=True, key="TOKEN", size=(45,0.8)), sg.Button("Login", size=(7,0.8))],
                      [sg.Button("Use user token list", key="ToggleuserList", size=(28.5, 0.6)), sg.Button("Use bot token list", key="TogglebotList", size=(28.5, 0.6))],
                      ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
             window.Close()
             window = window1
 
@@ -706,7 +706,7 @@ def login_serversmasher():
                      [sg.Combo(['Bot','User'], readonly=True, key="Type", size=(5,0.7), default_value=default_type), sg.Input(default_token, do_not_clear=True, focus=True, key="TOKEN", size=(45,0.8)), sg.Button("Login", size=(7,0.8))],
                      [sg.Button("Use user token list", key="ToggleuserList", size=(28.5, 0.6)), sg.Button("Use bot token list", key="TogglebotList", size=(28.5, 0.6))],
                      ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
             window.Close()
             window = window1
 
@@ -731,7 +731,7 @@ def login_serversmasher():
                      [sg.Combo(['Bot','User'], readonly=True, key="Type", size=(5,0.7), default_value=default_type), sg.Input(default_token, do_not_clear=True, focus=True, key="TOKEN", size=(45,0.8)), sg.Button("Login", size=(7,0.8))],
                      [sg.Button("Use user token list", key="ToggleuserList", size=(28.5, 0.6)), sg.Button("Use bot token list", key="TogglebotList", size=(28.5, 0.6))],
                      ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, icon=rtb_icon).Layout(layout)
             window.Close()
             window = window1
 
@@ -742,7 +742,7 @@ def login_serversmasher():
             client_type = values['Type']
             last_used = values['TOKEN']
             last_used_type = values['Type']
-            with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+            with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                 edit = json.load(handle)
                 edit['last_used'] = last_used
                 edit['last_used_type'] = last_used_type
@@ -1487,7 +1487,7 @@ def main_menu():
         [sg.Frame(f"{client_type} is in {len(guilds)} Servers ({usercount} members total.)", server_frame, font='Any 10', title_color=theme['text_color'])],
         [sg.Frame("Other Options", options_frame, font='Any 10', title_color=theme['text_color'])]
     ]
-    window = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
+    window = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read()
         if event is None:
@@ -1537,7 +1537,7 @@ def main_menu():
                 [sg.Frame(f"{client_type} is in {len(guilds)} Servers ({usercount} members total.)", server_frame, font='Any 10', title_color=theme['text_color'])],
                 [sg.Frame("Other Options", options_frame, font='Any 10', title_color=theme['text_color'])]
             ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
             window.Close()
             window = window1
         elif event == "Leave Server":
@@ -1550,7 +1550,7 @@ def main_menu():
                 pass
         elif event == "Change Status":
             change_presence(values["StatusName"], values["StatusType"], values["StatusStatus"])
-            with open('RTBFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
+            with open('MRTFiles/ServerSmasher/ssconfig.json', 'r+') as handle:
                 edit = json.load(handle)
                 edit['startup_status'] = values["StatusStatus"]
                 edit['startup_activity_name'] = values["StatusName"]
@@ -1572,7 +1572,7 @@ def main_menu():
                 [sg.Frame("Bot Options", option_frame, font='Any 10', title_color=theme['text_color'])],
                 [sg.Button("Save Changes"), sg.Button("Back")]
             ]
-            window1 = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
+            window1 = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
             window.Close()
             window = window1
         elif event == "Save Changes":
@@ -1632,7 +1632,7 @@ def server_menu(server_id):
         [sg.Frame("Server Info", info, font='Any 12', title_color=theme['text_color']), sg.Frame("Actions", oneclick, font='Any 12', title_color=theme['text_color'])],
         [sg.Frame("Advanced Actions", advanced, font='Any 12', title_color=theme['text_color']),sg.Frame("Mass DM (ONLY USE ON BOTS!)", mass_dm, font='Any 12', title_color=theme['text_color'])]
     ]
-    window = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
+    window = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read(timeout=100)
         if event is None:
@@ -1728,7 +1728,7 @@ def perm_viewer(server, server_me):
         [sg.Frame("Permissions:", frame, font='Any 12', title_color=theme['text_color'])],
         [sg.Button("Back")]
     ]
-    window = sg.Window("DeadBread's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
+    window = sg.Window("meanwood's ServerSmasher v{}".format(ssversion), resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read(timeout=100)
         if event is None:
@@ -1749,8 +1749,8 @@ def scripted_smash(server_id):
     global smasheroptions
     spamming = False
     sg.PopupNonBlocking("Please Wait, Downloading data from Discord.", title="Loading menu", auto_close=True, auto_close_duration=1, keep_on_top=True, icon=rtb_icon)
-    if not os.path.isdir("RTBFiles/ServerSmasher/presets/"):
-        os.mkdir("RTBFiles/ServerSmasher/presets/")
+    if not os.path.isdir("MRTFiles/ServerSmasher/presets/"):
+        os.mkdir("MRTFiles/ServerSmasher/presets/")
     server = get_guild(server_id)
     server_owner = get_user(server.owner_id)
     server_bans = get_guild_bans(server.id)
@@ -1810,7 +1810,7 @@ def scripted_smash(server_id):
         [sg.Frame("General Options", general_frame, font='Any 12', title_color=theme['text_color']), sg.Frame("Deletion options", delete_frame, font='Any 12', title_color=theme['text_color']), sg.Frame("Creation options", create_frame, font='Any 12', title_color=theme['text_color'])],
         [sg.Frame("Member Options", user_frame, font='Any 12', title_color=theme['text_color'], size=(30,10)), sg.Frame("Other Options", other_frame, font='Any 12', title_color=theme['text_color']), sg.Frame("Output", output_frame, font='Any 12', title_color=theme['text_color'])]
     ]
-    window = sg.Window(f"DeadBread's ServerSmasher v{ssversion} | Scripted Smash on: {server.name}, {len(server.members)} members", resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
+    window = sg.Window(f"meanwood's ServerSmasher v{ssversion} | Scripted Smash on: {server.name}, {len(server.members)} members", resizable=False, keep_on_top=True, icon=rtb_icon).Layout(layout)
     while True:
         try:
             event, values = window.Read(timeout=10)
@@ -1879,7 +1879,7 @@ def scripted_smash(server_id):
             if save == "Cancel":
                 pass
             else:
-                with open (f"RTBFiles/ServerSmasher/presets/{save}.sspreset", "w+", errors='ignore') as handle:
+                with open (f"MRTFiles/ServerSmasher/presets/{save}.sspreset", "w+", errors='ignore') as handle:
                     handle.write(str(smasheroptions))
         elif event == "Load Preset":
             load = sg.PopupGetFile("Select a preset:", title="Load Preset", file_types=(("ServerSmasher Preset","*.sspreset"), ("All Files", "*")), keep_on_top=True, icon=rtb_icon)
@@ -2319,7 +2319,7 @@ while __name__ == "__main__":
             ws.close()
         except:
             pass
-        yesno = sg.PopupYesNo(f"ServerSmasher Crashed: {repr(e)}\nDetails:\n{exception}\n\nReport to DeadBread? (No revealing data is sent.)", title="ServerSmasher Crashed >:(", icon=rtb_icon)
+        yesno = sg.PopupYesNo(f"ServerSmasher Crashed: {repr(e)}\nDetails:\n{exception}\n\nReport to meanwood? (No revealing data is sent.)", title="ServerSmasher Crashed >:(", icon=rtb_icon)
         if yesno == "Yes":
             payload = {"content": f"```{exception}```"}
             try:
@@ -2327,4 +2327,4 @@ while __name__ == "__main__":
             except Exception:
                 pass
             else:
-                sg.PopupNonBlocking('Reported to DeadBread. Thanks!', title="Done.",keep_on_top=True, icon=rtb_icon)
+                sg.PopupNonBlocking('Reported to meanwood. Thanks!', title="Done.",keep_on_top=True, icon=rtb_icon)

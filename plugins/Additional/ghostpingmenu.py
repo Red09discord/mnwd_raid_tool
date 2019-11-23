@@ -86,7 +86,7 @@ layout = [
         [sg.Text('Server ID', size=(15, 1)), sg.InputText()],
         [sg.RButton('Start',button_color=theme['button_colour'],size=(10,1))]
         ]
-window = sg.Window('RTB | Ghost Ping Spammer', layout, keep_on_top=True)
+window = sg.Window('MRT | Ghost Ping Spammer', layout, keep_on_top=True)
 event, values = window.Read()
 window.Close()
 if event == "Start":

