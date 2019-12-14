@@ -69,6 +69,9 @@ Python 3.6 and 3.7 are compatible, you can get them here:
 
 [Python 3.7.2](https://www.python.org/downloads/release/python-373/)
 
+**Windows**: On installation of python make sure to check, that all "tk-modules" are being installed.  
+**Linux**: If GUI does not start go to terminal and type sudo apt install python3-tk
+
 
 ### `Configuration:`
 
